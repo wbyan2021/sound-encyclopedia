@@ -1,0 +1,17 @@
+{
+  "id": "animals.wolf",
+  "category": "animals",
+  "subcategory": "wild",
+  "name_zh": "灰狼",
+  "name_en": "Wolf",
+  "emoji": "🐺",
+  "description": "夜晚对着月亮叫的家伙",
+  "sounds": [
+    { "file": "audio/wolf_howl1.mp3" }
+  ],
+  "tags": ["野生动物", "嚎叫", "灰狼"],
+  "license": "CC0-1.0",
+  "source": "https://freesound.org/",
+  "contributor": "wbyan2021",
+  "added_at": "2026-06-17"
+}

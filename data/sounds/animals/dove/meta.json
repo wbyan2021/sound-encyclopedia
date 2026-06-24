@@ -1,0 +1,18 @@
+{
+  "id": "animals.dove",
+  "category": "animals",
+  "subcategory": "bird",
+  "name_zh": "鸽子",
+  "name_en": "Dove",
+  "emoji": "🕊️",
+  "description": "和平的小天使，咕咕叫",
+  "sounds": [
+    { "file": "audio/dove_coo1.mp3" },
+    { "file": "audio/dove_coo2.mp3" }
+  ],
+  "tags": ["鸟类", "和平", "鸽子"],
+  "license": "CC0-1.0",
+  "source": "https://freesound.org/",
+  "contributor": "wbyan2021",
+  "added_at": "2026-06-17"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "animals.crocodile",
+  "category": "animals",
+  "subcategory": "reptile",
+  "name_zh": "鳄鱼",
+  "name_en": "Crocodile",
+  "emoji": "🐊",
+  "description": "大河里的大家伙，嘴巴特别大",
+  "sounds": [
+    { "file": "audio/real_crocodile1.mp3" }
+  ],
+  "tags": ["爬行类", "大嘴", "鳄鱼"],
+  "license": "CC0-1.0",
+  "source": "https://freesound.org/",
+  "contributor": "wbyan2021",
+  "added_at": "2026-06-17"
+}

@@ -1,0 +1,27 @@
+{
+  "id": "animals.bird",
+  "category": "animals",
+  "subcategory": "bird",
+  "name_zh": "小鸟",
+  "name_en": "Bird",
+  "emoji": "🐦",
+  "description": "唱好听的歌，在天空中飞翔",
+  "sounds": [
+    { "file": "audio/bulbul.mp3" },
+    { "file": "audio/flycatcher1.mp3" },
+    { "file": "audio/river_bird.mp3" },
+    { "file": "audio/sparrows.mp3" },
+    { "file": "audio/swallows.mp3" },
+    { "file": "audio/tropical_bird1.mp3" },
+    { "file": "audio/tropical_bird2.mp3" },
+    { "file": "audio/tropical_bird3.mp3" },
+    { "file": "audio/warbler1.mp3" },
+    { "file": "audio/warbler2.mp3" },
+    { "file": "audio/warbler3.mp3" }
+  ],
+  "tags": ["小鸟", "鸟类", "唱歌"],
+  "license": "CC0-1.0",
+  "source": "https://freesound.org/",
+  "contributor": "wbyan2021",
+  "added_at": "2026-06-17"
+}

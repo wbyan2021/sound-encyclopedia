@@ -1,0 +1,17 @@
+{
+  "id": "animals.sheep",
+  "category": "animals",
+  "subcategory": "farm",
+  "name_zh": "绵羊",
+  "name_en": "Sheep",
+  "emoji": "🐑",
+  "description": "穿厚毛衣的软绵绵，咩咩叫",
+  "sounds": [
+    { "file": "audio/real_sheep1.mp3" }
+  ],
+  "tags": ["农场", "咩咩", "绵羊"],
+  "license": "CC0-1.0",
+  "source": "https://freesound.org/",
+  "contributor": "wbyan2021",
+  "added_at": "2026-06-17"
+}

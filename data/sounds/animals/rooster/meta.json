@@ -1,0 +1,17 @@
+{
+  "id": "animals.rooster",
+  "category": "animals",
+  "subcategory": "farm",
+  "name_zh": "公鸡",
+  "name_en": "Rooster",
+  "emoji": "🐓",
+  "description": "农场里的大嗓门，喔喔叫",
+  "sounds": [
+    { "file": "audio/real_rooster1.mp3" }
+  ],
+  "tags": ["农场", "喔喔", "公鸡"],
+  "license": "CC0-1.0",
+  "source": "https://freesound.org/",
+  "contributor": "wbyan2021",
+  "added_at": "2026-06-17"
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>声音博物馆 V2</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:#FFF8E1;min-height:100vh}
+h1{text-align:center;padding:1rem;background:linear-gradient(135deg,#FF9800,#FFC107);color:#fff;font-size:1.5rem;box-shadow:0 2px 8px rgba(0,0,0,.1);position:sticky;top:0;z-index:10}
+.sub{font-size:.75rem;opacity:.8;margin-top:.1rem}
+.cats{display:flex;gap:.4rem;padding:.5rem .8rem;overflow-x:auto;background:#FFF3E0;position:sticky;top:3.5rem;z-index:9;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.cats button{flex-shrink:0;padding:.35rem .8rem;border:2px solid #FFE0B2;border-radius:20px;background:#fff;font-size:.85rem;cursor:pointer;transition:.15s;white-space:nowrap}
+.cats button.active,.cats button:hover{background:#FF9800;color:#fff;border-color:#FF9800}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.8rem;padding:.8rem}
+.card{background:#fff;border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;transition:transform .15s;box-shadow:0 2px 8px rgba(0,0,0,.06);user-select:none;-webkit-tap-highlight-color:transparent}
+.card:active{transform:scale(.94)}
+.card .emoji{font-size:2.8rem;display:block;margin-bottom:.3rem}
+.card .name{font-size:.85rem;font-weight:600;color:#333}
+.card .count{font-size:.7rem;color:#aaa}
+.playing .emoji{animation:bounce .3s ease}
+@keyframes bounce{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
+.loading{text-align:center;padding:3rem;color:#999}
+.stats{text-align:center;padding:.3rem;font-size:.7rem;color:#aaa;background:#FFF3E0}
+</style>
+</head>
+<body>
+<h1>声音博物馆 <div class="sub">V2 数据驱动 · 38种动物</div></h1>
+<div id="cats" class="cats"></div>
+<div id="stats" class="stats"></div>
+<div id="grid" class="grid"><div class="loading">正在加载 manifest.json...</div></div>
+
+<script>
+let manifest = null;
+let currentCat = 'all';
+
+async function load() {
+  try {
+    const r = await fetch('data/manifest.json');
+    manifest = await r.json();
+    renderCats();
+    renderStats();
+    renderGrid();
+  } catch(e) {
+    document.getElementById('grid').innerHTML =
+      '<div class="loading" style="color:#E24B4A">请通过 HTTP 服务器打开本页面<br><small>终端执行：<br><code>cd sound-museum && python3 -m http.server 9876 --bind 0.0.0.0</code><br>浏览器访问：http://localhost:9876</small></div>';
+  }
+}
+
+function renderCats() {
+  const cats = document.getElementById('cats');
+  const buttons = [{id:'all',name:'全部',emoji:'🌈'}];
+  manifest.categories.forEach(c => buttons.push({id:c.id,name:c.name_zh,emoji:c.emoji}));
+  cats.innerHTML = buttons.map((b,i) =>
+    '<button class="'+(i===0?'active':'')+'" data-cat="'+b.id+'">'+b.emoji+' '+b.name+'</button>'
+  ).join('');
+  cats.querySelectorAll('button').forEach(b => b.onclick = () => {
+    cats.querySelectorAll('button').forEach(x => x.className = '');
+    b.className = 'active';
+    currentCat = b.dataset.cat;
+    renderGrid();
+  });
+}
+
+function renderStats() {
+  document.getElementById('stats').textContent =
+    manifest.total_sounds + ' 种声音 · ' + manifest.total_audio_files + ' 个音频 · ' + manifest.version;
+}
+
+function renderGrid() {
+  var grid = document.getElementById('grid');
+  var sounds = currentCat === 'all'
+    ? manifest.sounds
+    : manifest.sounds.filter(function(s) { return s.category === currentCat; });
+
+  if (!sounds.length) {
+    grid.innerHTML = '<div class="loading">此分类暂无声音，欢迎贡献！</div>';
+    return;
+  }
+
+  var html = '';
+  sounds.forEach(function(s) {
+    var files = JSON.stringify(s.sounds.map(function(x) { return x.file; }));
+    html += '<div class="card" data-files=\'' + files + '\'>';
+    html += '<span class="emoji">' + s.emoji + '</span>';
+    html += '<div class="name">' + s.name_zh + '</div>';
+    html += '<div class="count">' + s.sounds.length + ' 个声音</div>';
+    html += '</div>';
+  });
+  grid.innerHTML = html;
+
+  var activeAudio = null;
+  grid.querySelectorAll('.card').forEach(function(card) {
+    card.onclick = function() {
+      var files = JSON.parse(card.dataset.files);
+      if (!files.length) return;
+      var f = files[Math.floor(Math.random() * files.length)];
+      if (activeAudio) { activeAudio.pause(); activeAudio = null; }
+      var audio = new Audio(f);
+      audio.play().catch(function() {});
+      activeAudio = audio;
+      card.classList.add('playing');
+      audio.onended = function() { card.classList.remove('playing'); activeAudio = null; };
+      setTimeout(function() { if (!audio.ended) card.classList.remove('playing'); }, 400);
+    };
+  });
+}
+
+load();
+</script>
+</body>
+</html>

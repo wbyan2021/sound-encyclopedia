@@ -1,0 +1,17 @@
+{
+  "id": "animals.whale",
+  "category": "animals",
+  "subcategory": "marine",
+  "name_zh": "鲸鱼",
+  "name_en": "Whale",
+  "emoji": "🐋",
+  "description": "海洋里最大的动物，会唱歌",
+  "sounds": [
+    { "file": "audio/real_whale1.mp3" }
+  ],
+  "tags": ["海洋", "大鱼", "鲸鱼"],
+  "license": "CC0-1.0",
+  "source": "https://freesound.org/",
+  "contributor": "wbyan2021",
+  "added_at": "2026-06-17"
+}

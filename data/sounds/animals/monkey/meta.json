@@ -1,0 +1,17 @@
+{
+  "id": "animals.monkey",
+  "category": "animals",
+  "subcategory": "wild",
+  "name_zh": "猴子",
+  "name_en": "Monkey",
+  "emoji": "🐒",
+  "description": "爱爬树的调皮鬼，吱吱叫",
+  "sounds": [
+    { "file": "audio/real_monkey1.mp3" }
+  ],
+  "tags": ["野生动物", "调皮", "猴子"],
+  "license": "CC0-1.0",
+  "source": "https://freesound.org/",
+  "contributor": "wbyan2021",
+  "added_at": "2026-06-17"
+}

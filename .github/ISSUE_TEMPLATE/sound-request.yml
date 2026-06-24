@@ -1,0 +1,32 @@
+name: 声音需求
+description: 请求添加一种新的声音
+labels: ["sound-request"]
+body:
+  - type: input
+    id: sound-name
+    attributes:
+      label: 声音名称
+      description: 你想要听到的声音，例如「鲸鱼」
+      placeholder: 例如：鲸鱼
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: 所属分类
+      description: 这个声音属于哪个大类
+      options:
+        - 动物 (animals)
+        - 自然 (nature)
+        - 交通 (transport)
+        - 生活 (life)
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: 补充说明
+      description: 任何额外信息，比如具体子分类、音频来源链接等
+      placeholder: 例如：海洋分类下的鲸鱼，我找到了这个来源 https://...
+    validations:
+      required: false

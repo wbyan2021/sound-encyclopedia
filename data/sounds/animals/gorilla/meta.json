@@ -1,0 +1,17 @@
+{
+  "id": "animals.gorilla",
+  "category": "animals",
+  "subcategory": "wild",
+  "name_zh": "大猩猩",
+  "name_en": "Gorilla",
+  "emoji": "🦍",
+  "description": "森林里的大个子，力气很大",
+  "sounds": [
+    { "file": "audio/real_gorilla1.mp3" }
+  ],
+  "tags": ["野生动物", "强壮", "大猩猩"],
+  "license": "CC0-1.0",
+  "source": "https://freesound.org/",
+  "contributor": "wbyan2021",
+  "added_at": "2026-06-17"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "animals.donkey",
+  "category": "animals",
+  "subcategory": "farm",
+  "name_zh": "驴",
+  "name_en": "Donkey",
+  "emoji": "🫏",
+  "description": "勤劳的长耳朵，会啊啊叫",
+  "sounds": [
+    { "file": "audio/real_donkey1.mp3" }
+  ],
+  "tags": ["农场", "啊啊", "驴"],
+  "license": "CC0-1.0",
+  "source": "https://freesound.org/",
+  "contributor": "wbyan2021",
+  "added_at": "2026-06-17"
+}

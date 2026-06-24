@@ -1,0 +1,18 @@
+{
+  "id": "animals.tiger",
+  "category": "animals",
+  "subcategory": "wild",
+  "name_zh": "老虎",
+  "name_en": "Tiger",
+  "emoji": "🐯",
+  "description": "森林里的大猫，身上有花纹",
+  "sounds": [
+    { "file": "audio/tiger_growl1.mp3" },
+    { "file": "audio/tiger_growl2.mp3" }
+  ],
+  "tags": ["野生动物", "大猫", "老虎"],
+  "license": "CC0-1.0",
+  "source": "https://freesound.org/",
+  "contributor": "wbyan2021",
+  "added_at": "2026-06-17"
+}

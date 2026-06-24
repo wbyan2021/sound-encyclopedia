@@ -1,0 +1,17 @@
+{
+  "id": "animals.goat",
+  "category": "animals",
+  "subcategory": "farm",
+  "name_zh": "山羊",
+  "name_en": "Goat",
+  "emoji": "🐐",
+  "description": "喜欢爬山的小家伙，咩咩叫",
+  "sounds": [
+    { "file": "audio/real_goat1.mp3" }
+  ],
+  "tags": ["农场", "咩咩", "山羊"],
+  "license": "CC0-1.0",
+  "source": "https://freesound.org/",
+  "contributor": "wbyan2021",
+  "added_at": "2026-06-17"
+}

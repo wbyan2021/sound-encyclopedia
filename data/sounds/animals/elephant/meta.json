@@ -1,0 +1,17 @@
+{
+  "id": "animals.elephant",
+  "category": "animals",
+  "subcategory": "wild",
+  "name_zh": "大象",
+  "name_en": "Elephant",
+  "emoji": "🐘",
+  "description": "陆地上最大的动物，鼻子超级长",
+  "sounds": [
+    { "file": "audio/real_elephant1.mp3" }
+  ],
+  "tags": ["野生动物", "长鼻子", "大象"],
+  "license": "CC0-1.0",
+  "source": "https://freesound.org/",
+  "contributor": "wbyan2021",
+  "added_at": "2026-06-17"
+}

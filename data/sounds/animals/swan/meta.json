@@ -1,0 +1,17 @@
+{
+  "id": "animals.swan",
+  "category": "animals",
+  "subcategory": "bird",
+  "name_zh": "天鹅",
+  "name_en": "Swan",
+  "emoji": "🦢",
+  "description": "湖面上优雅的白裙子",
+  "sounds": [
+    { "file": "audio/real_swan1.mp3" }
+  ],
+  "tags": ["鸟类", "优雅", "天鹅"],
+  "license": "CC0-1.0",
+  "source": "https://freesound.org/",
+  "contributor": "wbyan2021",
+  "added_at": "2026-06-17"
+}

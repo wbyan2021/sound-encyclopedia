@@ -1,0 +1,17 @@
+{
+  "id": "animals.owl",
+  "category": "animals",
+  "subcategory": "bird",
+  "name_zh": "猫头鹰",
+  "name_en": "Owl",
+  "emoji": "🦉",
+  "description": "夜晚不睡觉的大眼睛，咕咕叫",
+  "sounds": [
+    { "file": "audio/owl.mp3" }
+  ],
+  "tags": ["鸟类", "大眼睛", "猫头鹰"],
+  "license": "CC0-1.0",
+  "source": "https://freesound.org/",
+  "contributor": "wbyan2021",
+  "added_at": "2026-06-17"
+}

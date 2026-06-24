@@ -1,0 +1,24 @@
+{
+  "id": "animals.crow",
+  "category": "animals",
+  "subcategory": "bird",
+  "name_zh": "乌鸦",
+  "name_en": "Crow",
+  "emoji": "🐦‍⬛",
+  "description": "聪明的黑鸟，嘎嘎叫",
+  "sounds": [
+    { "file": "audio/crow1.mp3" },
+    { "file": "audio/crow2.mp3" },
+    { "file": "audio/crow3.mp3" },
+    { "file": "audio/crow4.mp3" },
+    { "file": "audio/crow5.mp3" },
+    { "file": "audio/crow6.mp3" },
+    { "file": "audio/crow7.mp3" },
+    { "file": "audio/crows.mp3" }
+  ],
+  "tags": ["鸟类", "嘎嘎", "乌鸦"],
+  "license": "CC0-1.0",
+  "source": "https://freesound.org/",
+  "contributor": "wbyan2021",
+  "added_at": "2026-06-17"
+}

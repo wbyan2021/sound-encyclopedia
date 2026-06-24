@@ -1,0 +1,17 @@
+{
+  "id": "animals.seal",
+  "category": "animals",
+  "subcategory": "marine",
+  "name_zh": "海豹",
+  "name_en": "Seal",
+  "emoji": "🦭",
+  "description": "圆滚滚的海里小可爱",
+  "sounds": [
+    { "file": "audio/real_seal1.mp3" }
+  ],
+  "tags": ["海洋", "可爱", "海豹"],
+  "license": "CC0-1.0",
+  "source": "https://freesound.org/",
+  "contributor": "wbyan2021",
+  "added_at": "2026-06-17"
+}

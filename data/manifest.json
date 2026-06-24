@@ -1,0 +1,1179 @@
+{
+  "version": "2026.06.24.2",
+  "generated_at": "2026-06-24T07:56:26.524Z",
+  "total_sounds": 38,
+  "total_audio_files": 96,
+  "categories": [
+    {
+      "id": "animals",
+      "name_zh": "动物",
+      "name_en": "Animals",
+      "emoji": "🐾",
+      "color": "#FF6F00",
+      "subcategories": [
+        {
+          "id": "pet",
+          "name_zh": "宠物",
+          "emoji": "🐕"
+        },
+        {
+          "id": "farm",
+          "name_zh": "农场",
+          "emoji": "🏠"
+        },
+        {
+          "id": "wild",
+          "name_zh": "野生",
+          "emoji": "🌿"
+        },
+        {
+          "id": "bird",
+          "name_zh": "鸟类",
+          "emoji": "🐦"
+        },
+        {
+          "id": "marine",
+          "name_zh": "海洋",
+          "emoji": "🌊"
+        },
+        {
+          "id": "reptile",
+          "name_zh": "爬行两栖",
+          "emoji": "🐸"
+        },
+        {
+          "id": "insect",
+          "name_zh": "昆虫",
+          "emoji": "🐝"
+        }
+      ]
+    },
+    {
+      "id": "nature",
+      "name_zh": "自然",
+      "name_en": "Nature",
+      "emoji": "🌳",
+      "color": "#43A047",
+      "subcategories": [
+        {
+          "id": "weather",
+          "name_zh": "天气",
+          "emoji": "🌧️"
+        },
+        {
+          "id": "water",
+          "name_zh": "水流",
+          "emoji": "💧"
+        },
+        {
+          "id": "forest",
+          "name_zh": "森林",
+          "emoji": "🌲"
+        }
+      ]
+    },
+    {
+      "id": "transport",
+      "name_zh": "交通",
+      "name_en": "Transport",
+      "emoji": "🚗",
+      "color": "#1E88E5",
+      "subcategories": [
+        {
+          "id": "road",
+          "name_zh": "道路",
+          "emoji": "🚙"
+        },
+        {
+          "id": "rail",
+          "name_zh": "轨道",
+          "emoji": "🚂"
+        },
+        {
+          "id": "sky",
+          "name_zh": "天空",
+          "emoji": "✈️"
+        },
+        {
+          "id": "water",
+          "name_zh": "水上",
+          "emoji": "🚢"
+        }
+      ]
+    },
+    {
+      "id": "life",
+      "name_zh": "生活",
+      "name_en": "Life",
+      "emoji": "🏠",
+      "color": "#8E24AA",
+      "subcategories": [
+        {
+          "id": "home",
+          "name_zh": "家庭",
+          "emoji": "🔔"
+        },
+        {
+          "id": "music",
+          "name_zh": "乐器",
+          "emoji": "🎵"
+        },
+        {
+          "id": "kitchen",
+          "name_zh": "厨房",
+          "emoji": "🍳"
+        }
+      ]
+    }
+  ],
+  "sounds": [
+    {
+      "id": "animals.bear",
+      "category": "animals",
+      "subcategory": "wild",
+      "name_zh": "棕熊",
+      "name_en": "Bear",
+      "emoji": "🐻",
+      "description": "森林里的大个子，冬天喜欢睡懒觉",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/bear/audio/real_bear1.mp3"
+        }
+      ],
+      "tags": [
+        "野生动物",
+        "大熊",
+        "棕熊"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.bee",
+      "category": "animals",
+      "subcategory": "insect",
+      "name_zh": "蜜蜂",
+      "name_en": "Bee",
+      "emoji": "🐝",
+      "description": "勤劳的小飞虫，嗡嗡采花蜜",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/bee/audio/bee_buzz1.mp3"
+        }
+      ],
+      "tags": [
+        "昆虫",
+        "嗡嗡",
+        "蜜蜂"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.bird",
+      "category": "animals",
+      "subcategory": "bird",
+      "name_zh": "小鸟",
+      "name_en": "Bird",
+      "emoji": "🐦",
+      "description": "唱好听的歌，在天空中飞翔",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/bird/audio/bulbul.mp3"
+        },
+        {
+          "file": "data/sounds/animals/bird/audio/flycatcher1.mp3"
+        },
+        {
+          "file": "data/sounds/animals/bird/audio/river_bird.mp3"
+        },
+        {
+          "file": "data/sounds/animals/bird/audio/sparrows.mp3"
+        },
+        {
+          "file": "data/sounds/animals/bird/audio/swallows.mp3"
+        },
+        {
+          "file": "data/sounds/animals/bird/audio/tropical_bird1.mp3"
+        },
+        {
+          "file": "data/sounds/animals/bird/audio/tropical_bird2.mp3"
+        },
+        {
+          "file": "data/sounds/animals/bird/audio/tropical_bird3.mp3"
+        },
+        {
+          "file": "data/sounds/animals/bird/audio/warbler1.mp3"
+        },
+        {
+          "file": "data/sounds/animals/bird/audio/warbler2.mp3"
+        },
+        {
+          "file": "data/sounds/animals/bird/audio/warbler3.mp3"
+        }
+      ],
+      "tags": [
+        "小鸟",
+        "鸟类",
+        "唱歌"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.cat",
+      "category": "animals",
+      "subcategory": "pet",
+      "name_zh": "小猫",
+      "name_en": "Cat",
+      "emoji": "🐱",
+      "description": "毛茸茸的小伙伴，会喵喵叫",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/cat/audio/cat1a.mp3"
+        },
+        {
+          "file": "data/sounds/animals/cat/audio/cat1b.mp3"
+        },
+        {
+          "file": "data/sounds/animals/cat/audio/cat2a.mp3"
+        },
+        {
+          "file": "data/sounds/animals/cat/audio/cat2b.mp3"
+        },
+        {
+          "file": "data/sounds/animals/cat/audio/cat3a.mp3"
+        },
+        {
+          "file": "data/sounds/animals/cat/audio/cat3b.mp3"
+        },
+        {
+          "file": "data/sounds/animals/cat/audio/cat3c.mp3"
+        },
+        {
+          "file": "data/sounds/animals/cat/audio/cat4a.mp3"
+        },
+        {
+          "file": "data/sounds/animals/cat/audio/cat4b.mp3"
+        },
+        {
+          "file": "data/sounds/animals/cat/audio/cat5a.mp3"
+        },
+        {
+          "file": "data/sounds/animals/cat/audio/cat_sweet_voice1.mp3"
+        },
+        {
+          "file": "data/sounds/animals/cat/audio/cat_sweet_voice2.mp3"
+        },
+        {
+          "file": "data/sounds/animals/cat/audio/cat_sweet_voice3.mp3"
+        },
+        {
+          "file": "data/sounds/animals/cat/audio/cat_sweet_voice4.mp3"
+        },
+        {
+          "file": "data/sounds/animals/cat/audio/cats_fighting.mp3"
+        },
+        {
+          "file": "data/sounds/animals/cat/audio/old_cat1.mp3"
+        },
+        {
+          "file": "data/sounds/animals/cat/audio/old_cat2.mp3"
+        },
+        {
+          "file": "data/sounds/animals/cat/audio/old_cat3.mp3"
+        },
+        {
+          "file": "data/sounds/animals/cat/audio/purring.mp3"
+        }
+      ],
+      "tags": [
+        "宠物",
+        "喵喵",
+        "小猫"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.chicken",
+      "category": "animals",
+      "subcategory": "farm",
+      "name_zh": "母鸡",
+      "name_en": "Chicken",
+      "emoji": "🐔",
+      "description": "农场里的妈妈，会咯咯叫",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/chicken/audio/hen_cackle1.mp3"
+        },
+        {
+          "file": "data/sounds/animals/chicken/audio/hen_cackle2.mp3"
+        }
+      ],
+      "tags": [
+        "农场",
+        "咯咯",
+        "母鸡"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.cow",
+      "category": "animals",
+      "subcategory": "farm",
+      "name_zh": "奶牛",
+      "name_en": "Cow",
+      "emoji": "🐮",
+      "description": "农场里的大家伙，哞哞叫",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/cow/audio/cow1.mp3"
+        }
+      ],
+      "tags": [
+        "农场",
+        "哞哞",
+        "奶牛"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.cricket",
+      "category": "animals",
+      "subcategory": "insect",
+      "name_zh": "蟋蟀",
+      "name_en": "Cricket",
+      "emoji": "🦗",
+      "description": "草丛里的小歌手，唧唧叫",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/cricket/audio/cricket_chirp1.mp3"
+        },
+        {
+          "file": "data/sounds/animals/cricket/audio/cricket_chirp2.mp3"
+        }
+      ],
+      "tags": [
+        "昆虫",
+        "唧唧",
+        "蟋蟀"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.crocodile",
+      "category": "animals",
+      "subcategory": "reptile",
+      "name_zh": "鳄鱼",
+      "name_en": "Crocodile",
+      "emoji": "🐊",
+      "description": "大河里的大家伙，嘴巴特别大",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/crocodile/audio/real_crocodile1.mp3"
+        }
+      ],
+      "tags": [
+        "爬行类",
+        "大嘴",
+        "鳄鱼"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.crow",
+      "category": "animals",
+      "subcategory": "bird",
+      "name_zh": "乌鸦",
+      "name_en": "Crow",
+      "emoji": "🐦‍⬛",
+      "description": "聪明的黑鸟，嘎嘎叫",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/crow/audio/crow1.mp3"
+        },
+        {
+          "file": "data/sounds/animals/crow/audio/crow2.mp3"
+        },
+        {
+          "file": "data/sounds/animals/crow/audio/crow3.mp3"
+        },
+        {
+          "file": "data/sounds/animals/crow/audio/crow4.mp3"
+        },
+        {
+          "file": "data/sounds/animals/crow/audio/crow5.mp3"
+        },
+        {
+          "file": "data/sounds/animals/crow/audio/crow6.mp3"
+        },
+        {
+          "file": "data/sounds/animals/crow/audio/crow7.mp3"
+        },
+        {
+          "file": "data/sounds/animals/crow/audio/crows.mp3"
+        }
+      ],
+      "tags": [
+        "鸟类",
+        "嘎嘎",
+        "乌鸦"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.dog",
+      "category": "animals",
+      "subcategory": "pet",
+      "name_zh": "小狗",
+      "name_en": "Dog",
+      "emoji": "🐶",
+      "description": "人类最忠实的朋友，喜欢汪汪叫",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/dog/audio/dog1a.mp3"
+        },
+        {
+          "file": "data/sounds/animals/dog/audio/dog1b.mp3"
+        },
+        {
+          "file": "data/sounds/animals/dog/audio/dog2a.mp3"
+        },
+        {
+          "file": "data/sounds/animals/dog/audio/dog2b.mp3"
+        },
+        {
+          "file": "data/sounds/animals/dog/audio/dog3a.mp3"
+        },
+        {
+          "file": "data/sounds/animals/dog/audio/dog_barking1.mp3"
+        },
+        {
+          "file": "data/sounds/animals/dog/audio/dog_barking2.mp3"
+        },
+        {
+          "file": "data/sounds/animals/dog/audio/maltese_dog1.mp3"
+        },
+        {
+          "file": "data/sounds/animals/dog/audio/maltese_dog2.mp3"
+        },
+        {
+          "file": "data/sounds/animals/dog/audio/maltese_dog3.mp3"
+        },
+        {
+          "file": "data/sounds/animals/dog/audio/maltese_dog4.mp3"
+        },
+        {
+          "file": "data/sounds/animals/dog/audio/maltese_dog5.mp3"
+        },
+        {
+          "file": "data/sounds/animals/dog/audio/maltese_dog6.mp3"
+        },
+        {
+          "file": "data/sounds/animals/dog/audio/maltese_dog7.mp3"
+        },
+        {
+          "file": "data/sounds/animals/dog/audio/small_dog1.mp3"
+        },
+        {
+          "file": "data/sounds/animals/dog/audio/small_dog2.mp3"
+        },
+        {
+          "file": "data/sounds/animals/dog/audio/talking_dog.mp3"
+        }
+      ],
+      "tags": [
+        "宠物",
+        "汪汪",
+        "小狗"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.dolphin",
+      "category": "animals",
+      "subcategory": "marine",
+      "name_zh": "海豚",
+      "name_en": "Dolphin",
+      "emoji": "🐬",
+      "description": "海洋里最聪明的动物，喜欢跳跃",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/dolphin/audio/real_dolphin1.mp3"
+        }
+      ],
+      "tags": [
+        "海洋",
+        "聪明",
+        "海豚"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.donkey",
+      "category": "animals",
+      "subcategory": "farm",
+      "name_zh": "驴",
+      "name_en": "Donkey",
+      "emoji": "🫏",
+      "description": "勤劳的长耳朵，会啊啊叫",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/donkey/audio/real_donkey1.mp3"
+        }
+      ],
+      "tags": [
+        "农场",
+        "啊啊",
+        "驴"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.dove",
+      "category": "animals",
+      "subcategory": "bird",
+      "name_zh": "鸽子",
+      "name_en": "Dove",
+      "emoji": "🕊️",
+      "description": "和平的小天使，咕咕叫",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/dove/audio/dove_coo1.mp3"
+        },
+        {
+          "file": "data/sounds/animals/dove/audio/dove_coo2.mp3"
+        }
+      ],
+      "tags": [
+        "鸟类",
+        "和平",
+        "鸽子"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.duck",
+      "category": "animals",
+      "subcategory": "farm",
+      "name_zh": "鸭子",
+      "name_en": "Duck",
+      "emoji": "🦆",
+      "description": "摇摇摆摆走路，嘎嘎叫",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/duck/audio/mallard1.mp3"
+        }
+      ],
+      "tags": [
+        "农场",
+        "嘎嘎",
+        "鸭子"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.eagle",
+      "category": "animals",
+      "subcategory": "bird",
+      "name_zh": "鹰",
+      "name_en": "Eagle",
+      "emoji": "🦅",
+      "description": "天空中的大力士，飞得很高",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/eagle/audio/eagle_call1.mp3"
+        },
+        {
+          "file": "data/sounds/animals/eagle/audio/eagle_call2.mp3"
+        }
+      ],
+      "tags": [
+        "鸟类",
+        "飞翔",
+        "鹰"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.elephant",
+      "category": "animals",
+      "subcategory": "wild",
+      "name_zh": "大象",
+      "name_en": "Elephant",
+      "emoji": "🐘",
+      "description": "陆地上最大的动物，鼻子超级长",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/elephant/audio/real_elephant1.mp3"
+        }
+      ],
+      "tags": [
+        "野生动物",
+        "长鼻子",
+        "大象"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.fox",
+      "category": "animals",
+      "subcategory": "wild",
+      "name_zh": "狐狸",
+      "name_en": "Fox",
+      "emoji": "🦊",
+      "description": "聪明的红毛家伙，尾巴很大",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/fox/audio/real_fox1.mp3"
+        }
+      ],
+      "tags": [
+        "野生动物",
+        "聪明",
+        "狐狸"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.frog",
+      "category": "animals",
+      "subcategory": "reptile",
+      "name_zh": "青蛙",
+      "name_en": "Frog",
+      "emoji": "🐸",
+      "description": "爱跳的小家伙，呱呱叫",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/frog/audio/real_frog1.mp3"
+        }
+      ],
+      "tags": [
+        "爬行类",
+        "呱呱",
+        "青蛙"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.goat",
+      "category": "animals",
+      "subcategory": "farm",
+      "name_zh": "山羊",
+      "name_en": "Goat",
+      "emoji": "🐐",
+      "description": "喜欢爬山的小家伙，咩咩叫",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/goat/audio/real_goat1.mp3"
+        }
+      ],
+      "tags": [
+        "农场",
+        "咩咩",
+        "山羊"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.gorilla",
+      "category": "animals",
+      "subcategory": "wild",
+      "name_zh": "大猩猩",
+      "name_en": "Gorilla",
+      "emoji": "🦍",
+      "description": "森林里的大个子，力气很大",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/gorilla/audio/real_gorilla1.mp3"
+        }
+      ],
+      "tags": [
+        "野生动物",
+        "强壮",
+        "大猩猩"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.horse",
+      "category": "animals",
+      "subcategory": "farm",
+      "name_zh": "马",
+      "name_en": "Horse",
+      "emoji": "🐴",
+      "description": "跑得飞快的大朋友，嘶嘶叫",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/horse/audio/real_horse1.mp3"
+        }
+      ],
+      "tags": [
+        "农场",
+        "嘶嘶",
+        "马"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.lion",
+      "category": "animals",
+      "subcategory": "wild",
+      "name_zh": "狮子",
+      "name_en": "Lion",
+      "emoji": "🦁",
+      "description": "草原上的大猫，吼声很响亮",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/lion/audio/real_lion1.mp3"
+        }
+      ],
+      "tags": [
+        "野生动物",
+        "吼叫",
+        "狮子"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.monkey",
+      "category": "animals",
+      "subcategory": "wild",
+      "name_zh": "猴子",
+      "name_en": "Monkey",
+      "emoji": "🐒",
+      "description": "爱爬树的调皮鬼，吱吱叫",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/monkey/audio/real_monkey1.mp3"
+        }
+      ],
+      "tags": [
+        "野生动物",
+        "调皮",
+        "猴子"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.mosquito",
+      "category": "animals",
+      "subcategory": "insect",
+      "name_zh": "蚊子",
+      "name_en": "Mosquito",
+      "emoji": "🦟",
+      "description": "嗡嗡飞的小虫子，喜欢叮人",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/mosquito/audio/mosquito_buzz1.mp3"
+        },
+        {
+          "file": "data/sounds/animals/mosquito/audio/mosquito_buzz2.mp3"
+        }
+      ],
+      "tags": [
+        "昆虫",
+        "嗡嗡",
+        "蚊子"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.mouse",
+      "category": "animals",
+      "subcategory": "pet",
+      "name_zh": "老鼠",
+      "name_en": "Mouse",
+      "emoji": "🐭",
+      "description": "小小的小家伙，吱吱叫",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/mouse/audio/mouse_squeak1.mp3"
+        },
+        {
+          "file": "data/sounds/animals/mouse/audio/mouse_squeak2.mp3"
+        }
+      ],
+      "tags": [
+        "宠物",
+        "吱吱",
+        "小老鼠"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.owl",
+      "category": "animals",
+      "subcategory": "bird",
+      "name_zh": "猫头鹰",
+      "name_en": "Owl",
+      "emoji": "🦉",
+      "description": "夜晚不睡觉的大眼睛，咕咕叫",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/owl/audio/owl.mp3"
+        }
+      ],
+      "tags": [
+        "鸟类",
+        "大眼睛",
+        "猫头鹰"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.parrot",
+      "category": "animals",
+      "subcategory": "bird",
+      "name_zh": "鹦鹉",
+      "name_en": "Parrot",
+      "emoji": "🦜",
+      "description": "会学人说话的彩色小鸟",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/parrot/audio/real_parrot1.mp3"
+        }
+      ],
+      "tags": [
+        "鸟类",
+        "学说话",
+        "鹦鹉"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.peacock",
+      "category": "animals",
+      "subcategory": "bird",
+      "name_zh": "孔雀",
+      "name_en": "Peacock",
+      "emoji": "🦚",
+      "description": "最美的鸟，会开屏",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/peacock/audio/real_peacock1.mp3"
+        }
+      ],
+      "tags": [
+        "鸟类",
+        "美丽",
+        "孔雀"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.penguin",
+      "category": "animals",
+      "subcategory": "bird",
+      "name_zh": "企鹅",
+      "name_en": "Penguin",
+      "emoji": "🐧",
+      "description": "穿燕尾服的南极居民，摇摇摆摆",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/penguin/audio/real_penguin1.mp3"
+        }
+      ],
+      "tags": [
+        "鸟类",
+        "南极",
+        "企鹅"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.pig",
+      "category": "animals",
+      "subcategory": "farm",
+      "name_zh": "猪",
+      "name_en": "Pig",
+      "emoji": "🐷",
+      "description": "粉嘟嘟的胖家伙，哼哼叫",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/pig/audio/real_pig1.mp3"
+        }
+      ],
+      "tags": [
+        "农场",
+        "哼哼",
+        "猪"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.rooster",
+      "category": "animals",
+      "subcategory": "farm",
+      "name_zh": "公鸡",
+      "name_en": "Rooster",
+      "emoji": "🐓",
+      "description": "农场里的大嗓门，喔喔叫",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/rooster/audio/real_rooster1.mp3"
+        }
+      ],
+      "tags": [
+        "农场",
+        "喔喔",
+        "公鸡"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.seal",
+      "category": "animals",
+      "subcategory": "marine",
+      "name_zh": "海豹",
+      "name_en": "Seal",
+      "emoji": "🦭",
+      "description": "圆滚滚的海里小可爱",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/seal/audio/real_seal1.mp3"
+        }
+      ],
+      "tags": [
+        "海洋",
+        "可爱",
+        "海豹"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.sheep",
+      "category": "animals",
+      "subcategory": "farm",
+      "name_zh": "绵羊",
+      "name_en": "Sheep",
+      "emoji": "🐑",
+      "description": "穿厚毛衣的软绵绵，咩咩叫",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/sheep/audio/real_sheep1.mp3"
+        }
+      ],
+      "tags": [
+        "农场",
+        "咩咩",
+        "绵羊"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.snake",
+      "category": "animals",
+      "subcategory": "reptile",
+      "name_zh": "蛇",
+      "name_en": "Snake",
+      "emoji": "🐍",
+      "description": "没有脚的长家伙，嘶嘶叫",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/snake/audio/real_snake1.mp3"
+        }
+      ],
+      "tags": [
+        "爬行类",
+        "滑溜溜",
+        "蛇"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.swan",
+      "category": "animals",
+      "subcategory": "bird",
+      "name_zh": "天鹅",
+      "name_en": "Swan",
+      "emoji": "🦢",
+      "description": "湖面上优雅的白裙子",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/swan/audio/real_swan1.mp3"
+        }
+      ],
+      "tags": [
+        "鸟类",
+        "优雅",
+        "天鹅"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.tiger",
+      "category": "animals",
+      "subcategory": "wild",
+      "name_zh": "老虎",
+      "name_en": "Tiger",
+      "emoji": "🐯",
+      "description": "森林里的大猫，身上有花纹",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/tiger/audio/tiger_growl1.mp3"
+        },
+        {
+          "file": "data/sounds/animals/tiger/audio/tiger_growl2.mp3"
+        }
+      ],
+      "tags": [
+        "野生动物",
+        "大猫",
+        "老虎"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.whale",
+      "category": "animals",
+      "subcategory": "marine",
+      "name_zh": "鲸鱼",
+      "name_en": "Whale",
+      "emoji": "🐋",
+      "description": "海洋里最大的动物，会唱歌",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/whale/audio/real_whale1.mp3"
+        }
+      ],
+      "tags": [
+        "海洋",
+        "大鱼",
+        "鲸鱼"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    },
+    {
+      "id": "animals.wolf",
+      "category": "animals",
+      "subcategory": "wild",
+      "name_zh": "灰狼",
+      "name_en": "Wolf",
+      "emoji": "🐺",
+      "description": "夜晚对着月亮叫的家伙",
+      "sounds": [
+        {
+          "file": "data/sounds/animals/wolf/audio/wolf_howl1.mp3"
+        }
+      ],
+      "tags": [
+        "野生动物",
+        "嚎叫",
+        "灰狼"
+      ],
+      "license": "CC0-1.0",
+      "source": "https://freesound.org/",
+      "contributor": "wbyan2021",
+      "added_at": "2026-06-17"
+    }
+  ]
+}

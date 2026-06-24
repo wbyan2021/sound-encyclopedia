@@ -1,0 +1,17 @@
+{
+  "id": "animals.duck",
+  "category": "animals",
+  "subcategory": "farm",
+  "name_zh": "鸭子",
+  "name_en": "Duck",
+  "emoji": "🦆",
+  "description": "摇摇摆摆走路，嘎嘎叫",
+  "sounds": [
+    { "file": "audio/mallard1.mp3" }
+  ],
+  "tags": ["农场", "嘎嘎", "鸭子"],
+  "license": "CC0-1.0",
+  "source": "https://freesound.org/",
+  "contributor": "wbyan2021",
+  "added_at": "2026-06-17"
+}

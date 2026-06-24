@@ -1,0 +1,17 @@
+{
+  "id": "animals.bear",
+  "category": "animals",
+  "subcategory": "wild",
+  "name_zh": "棕熊",
+  "name_en": "Bear",
+  "emoji": "🐻",
+  "description": "森林里的大个子，冬天喜欢睡懒觉",
+  "sounds": [
+    { "file": "audio/real_bear1.mp3" }
+  ],
+  "tags": ["野生动物", "大熊", "棕熊"],
+  "license": "CC0-1.0",
+  "source": "https://freesound.org/",
+  "contributor": "wbyan2021",
+  "added_at": "2026-06-17"
+}

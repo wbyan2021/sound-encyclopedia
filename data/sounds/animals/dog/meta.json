@@ -1,0 +1,33 @@
+{
+  "id": "animals.dog",
+  "category": "animals",
+  "subcategory": "pet",
+  "name_zh": "小狗",
+  "name_en": "Dog",
+  "emoji": "🐶",
+  "description": "人类最忠实的朋友，喜欢汪汪叫",
+  "sounds": [
+    { "file": "audio/dog1a.mp3" },
+    { "file": "audio/dog1b.mp3" },
+    { "file": "audio/dog2a.mp3" },
+    { "file": "audio/dog2b.mp3" },
+    { "file": "audio/dog3a.mp3" },
+    { "file": "audio/dog_barking1.mp3" },
+    { "file": "audio/dog_barking2.mp3" },
+    { "file": "audio/maltese_dog1.mp3" },
+    { "file": "audio/maltese_dog2.mp3" },
+    { "file": "audio/maltese_dog3.mp3" },
+    { "file": "audio/maltese_dog4.mp3" },
+    { "file": "audio/maltese_dog5.mp3" },
+    { "file": "audio/maltese_dog6.mp3" },
+    { "file": "audio/maltese_dog7.mp3" },
+    { "file": "audio/small_dog1.mp3" },
+    { "file": "audio/small_dog2.mp3" },
+    { "file": "audio/talking_dog.mp3" }
+  ],
+  "tags": ["宠物", "汪汪", "小狗"],
+  "license": "CC0-1.0",
+  "source": "https://freesound.org/",
+  "contributor": "wbyan2021",
+  "added_at": "2026-06-17"
+}

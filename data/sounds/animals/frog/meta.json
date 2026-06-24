@@ -1,0 +1,17 @@
+{
+  "id": "animals.frog",
+  "category": "animals",
+  "subcategory": "reptile",
+  "name_zh": "青蛙",
+  "name_en": "Frog",
+  "emoji": "🐸",
+  "description": "爱跳的小家伙，呱呱叫",
+  "sounds": [
+    { "file": "audio/real_frog1.mp3" }
+  ],
+  "tags": ["爬行类", "呱呱", "青蛙"],
+  "license": "CC0-1.0",
+  "source": "https://freesound.org/",
+  "contributor": "wbyan2021",
+  "added_at": "2026-06-17"
+}

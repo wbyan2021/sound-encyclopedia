@@ -1,0 +1,55 @@
+[
+  {
+    "id": "animals",
+    "name_zh": "动物",
+    "name_en": "Animals",
+    "emoji": "🐾",
+    "color": "#FF6F00",
+    "subcategories": [
+      { "id": "pet", "name_zh": "宠物", "emoji": "🐕" },
+      { "id": "farm", "name_zh": "农场", "emoji": "🏠" },
+      { "id": "wild", "name_zh": "野生", "emoji": "🌿" },
+      { "id": "bird", "name_zh": "鸟类", "emoji": "🐦" },
+      { "id": "marine", "name_zh": "海洋", "emoji": "🌊" },
+      { "id": "reptile", "name_zh": "爬行两栖", "emoji": "🐸" },
+      { "id": "insect", "name_zh": "昆虫", "emoji": "🐝" }
+    ]
+  },
+  {
+    "id": "nature",
+    "name_zh": "自然",
+    "name_en": "Nature",
+    "emoji": "🌳",
+    "color": "#43A047",
+    "subcategories": [
+      { "id": "weather", "name_zh": "天气", "emoji": "🌧️" },
+      { "id": "water", "name_zh": "水流", "emoji": "💧" },
+      { "id": "forest", "name_zh": "森林", "emoji": "🌲" }
+    ]
+  },
+  {
+    "id": "transport",
+    "name_zh": "交通",
+    "name_en": "Transport",
+    "emoji": "🚗",
+    "color": "#1E88E5",
+    "subcategories": [
+      { "id": "road", "name_zh": "道路", "emoji": "🚙" },
+      { "id": "rail", "name_zh": "轨道", "emoji": "🚂" },
+      { "id": "sky", "name_zh": "天空", "emoji": "✈️" },
+      { "id": "water", "name_zh": "水上", "emoji": "🚢" }
+    ]
+  },
+  {
+    "id": "life",
+    "name_zh": "生活",
+    "name_en": "Life",
+    "emoji": "🏠",
+    "color": "#8E24AA",
+    "subcategories": [
+      { "id": "home", "name_zh": "家庭", "emoji": "🔔" },
+      { "id": "music", "name_zh": "乐器", "emoji": "🎵" },
+      { "id": "kitchen", "name_zh": "厨房", "emoji": "🍳" }
+    ]
+  }
+]

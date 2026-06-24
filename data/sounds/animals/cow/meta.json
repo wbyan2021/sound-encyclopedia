@@ -1,0 +1,17 @@
+{
+  "id": "animals.cow",
+  "category": "animals",
+  "subcategory": "farm",
+  "name_zh": "奶牛",
+  "name_en": "Cow",
+  "emoji": "🐮",
+  "description": "农场里的大家伙，哞哞叫",
+  "sounds": [
+    { "file": "audio/cow1.mp3" }
+  ],
+  "tags": ["农场", "哞哞", "奶牛"],
+  "license": "CC0-1.0",
+  "source": "https://freesound.org/",
+  "contributor": "wbyan2021",
+  "added_at": "2026-06-17"
+}

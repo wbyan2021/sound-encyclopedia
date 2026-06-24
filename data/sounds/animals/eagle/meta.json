@@ -1,0 +1,18 @@
+{
+  "id": "animals.eagle",
+  "category": "animals",
+  "subcategory": "bird",
+  "name_zh": "鹰",
+  "name_en": "Eagle",
+  "emoji": "🦅",
+  "description": "天空中的大力士，飞得很高",
+  "sounds": [
+    { "file": "audio/eagle_call1.mp3" },
+    { "file": "audio/eagle_call2.mp3" }
+  ],
+  "tags": ["鸟类", "飞翔", "鹰"],
+  "license": "CC0-1.0",
+  "source": "https://freesound.org/",
+  "contributor": "wbyan2021",
+  "added_at": "2026-06-17"
+}

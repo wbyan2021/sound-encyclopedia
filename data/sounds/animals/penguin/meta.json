@@ -1,0 +1,17 @@
+{
+  "id": "animals.penguin",
+  "category": "animals",
+  "subcategory": "bird",
+  "name_zh": "企鹅",
+  "name_en": "Penguin",
+  "emoji": "🐧",
+  "description": "穿燕尾服的南极居民，摇摇摆摆",
+  "sounds": [
+    { "file": "audio/real_penguin1.mp3" }
+  ],
+  "tags": ["鸟类", "南极", "企鹅"],
+  "license": "CC0-1.0",
+  "source": "https://freesound.org/",
+  "contributor": "wbyan2021",
+  "added_at": "2026-06-17"
+}

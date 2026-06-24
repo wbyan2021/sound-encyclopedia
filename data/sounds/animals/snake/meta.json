@@ -1,0 +1,17 @@
+{
+  "id": "animals.snake",
+  "category": "animals",
+  "subcategory": "reptile",
+  "name_zh": "蛇",
+  "name_en": "Snake",
+  "emoji": "🐍",
+  "description": "没有脚的长家伙，嘶嘶叫",
+  "sounds": [
+    { "file": "audio/real_snake1.mp3" }
+  ],
+  "tags": ["爬行类", "滑溜溜", "蛇"],
+  "license": "CC0-1.0",
+  "source": "https://freesound.org/",
+  "contributor": "wbyan2021",
+  "added_at": "2026-06-17"
+}
