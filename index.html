@@ -2,112 +2,335 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
 <title>声音大百科</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:#FFF8E1;min-height:100vh}
-h1{text-align:center;padding:1rem;background:linear-gradient(135deg,#FF9800,#FFC107);color:#fff;font-size:1.5rem;box-shadow:0 2px 8px rgba(0,0,0,.1);position:sticky;top:0;z-index:10}
-.sub{font-size:.75rem;opacity:.8;margin-top:.1rem}
-.cats{display:flex;gap:.4rem;padding:.5rem .8rem;overflow-x:auto;background:#FFF3E0;position:sticky;top:3.5rem;z-index:9;scrollbar-width:none}
-.cats::-webkit-scrollbar{display:none}
-.cats button{flex-shrink:0;padding:.35rem .8rem;border:2px solid #FFE0B2;border-radius:20px;background:#fff;font-size:.85rem;cursor:pointer;transition:.15s;white-space:nowrap}
-.cats button.active,.cats button:hover{background:#FF9800;color:#fff;border-color:#FF9800}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.8rem;padding:.8rem}
-.card{background:#fff;border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;transition:transform .15s;box-shadow:0 2px 8px rgba(0,0,0,.06);user-select:none;-webkit-tap-highlight-color:transparent}
-.card:active{transform:scale(.94)}
-.card .emoji{font-size:2.8rem;display:block;margin-bottom:.3rem}
-.card .name{font-size:.85rem;font-weight:600;color:#333}
-.card .count{font-size:.7rem;color:#aaa}
-.playing .emoji{animation:bounce .3s ease}
-@keyframes bounce{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
-.loading{text-align:center;padding:3rem;color:#999}
-.stats{text-align:center;padding:.3rem;font-size:.7rem;color:#aaa;background:#FFF3E0}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+body{background:#FFF8E1;overflow-x:hidden;min-height:100vh}
+
+/* ===== START SCREEN ===== */
+#start-screen{position:fixed;inset:0;z-index:1000;background:linear-gradient(135deg,#FF9800 0%,#FFC107 40%,#4CAF50 70%,#03A9F4 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s,transform .6s}
+#start-screen.hide{opacity:0;transform:scale(1.1);pointer-events:none}
+.start-title{font-size:clamp(2.2rem,8vw,4rem);font-weight:900;color:#fff;text-shadow:3px 3px 0 rgba(0,0,0,.2),0 0 40px rgba(255,255,255,.3);margin-bottom:1.5rem;letter-spacing:.05em}
+.start-subtitle{font-size:clamp(1rem,3vw,1.4rem);color:rgba(255,255,255,.9);margin-bottom:2rem;text-shadow:1px 1px 0 rgba(0,0,0,.1)}
+.start-emojis{font-size:clamp(2.5rem,10vw,5rem);margin-bottom:2rem;animation:floatEmoji 3s ease-in-out infinite}
+@keyframes floatEmoji{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+.start-btn{background:#fff;color:#FF6F00;border:none;border-radius:50px;padding:1rem 3rem;font-size:clamp(1.2rem,4vw,1.8rem);font-weight:800;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,.2);transition:transform .15s;position:relative;overflow:hidden}
+.start-btn:active{transform:scale(.95)}
+.start-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.4) 50%,transparent 60%);animation:btnShine 3s infinite}
+@keyframes btnShine{0%{transform:translateX(-100%)}30%,100%{transform:translateX(100%)}}
+
+.load-progress{display:none;flex-direction:column;align-items:center;margin-top:1.5rem;width:80%;max-width:300px}
+.progress-bar{width:100%;height:14px;background:rgba(255,255,255,.3);border-radius:7px;overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,.1)}
+.progress-fill{height:100%;background:linear-gradient(90deg,#4CAF50,#8BC34A,#CDDC39);border-radius:7px;transition:width .3s ease;width:0%;position:relative}
+.progress-fill::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);animation:progressShine 1.5s infinite}
+@keyframes progressShine{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.progress-text{color:rgba(255,255,255,.9);font-size:.9rem;margin-top:.6rem;text-shadow:1px 1px 0 rgba(0,0,0,.1)}
+.skip-link{color:rgba(255,255,255,.6);font-size:.8rem;margin-top:.8rem;cursor:pointer;text-decoration:underline}
+.skip-link:hover{color:#fff}
+
+.particle{position:absolute;font-size:2rem;opacity:.6;animation:particleFloat linear infinite;pointer-events:none}
+@keyframes particleFloat{0%{transform:translateY(100vh) rotate(0deg)}100%{transform:translateY(-10vh) rotate(360deg)}}
+
+/* ===== MAIN APP ===== */
+#app{display:none;flex-direction:column;min-height:100vh}
+#app.show{display:flex}
+
+.app-header{text-align:center;padding:.8rem 1rem;background:linear-gradient(135deg,#FF9800,#FFC107);color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.1)}
+.app-title{font-size:clamp(1.3rem,4vw,2rem);font-weight:900;text-shadow:1px 1px 0 rgba(0,0,0,.1)}
+.app-subtitle{font-size:.8rem;opacity:.8;margin-top:.2rem}
+
+.cat-tabs{display:flex;gap:.5rem;padding:.6rem 1rem;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;background:#FFF3E0;position:sticky;top:3.2rem;z-index:99}
+.cat-tabs::-webkit-scrollbar{display:none}
+.cat-tab{flex-shrink:0;padding:.5rem 1rem;border-radius:25px;border:2px solid #FFE0B2;background:#fff;font-size:clamp(.85rem,2.5vw,1rem);font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:.3rem}
+.cat-tab.active{background:#FF9800;color:#fff;border-color:#FF9800;box-shadow:0 2px 8px rgba(255,152,0,.3)}
+.cat-tab:active{transform:scale(.95)}
+
+.sound-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:1rem;padding:1rem;max-width:1200px;margin:0 auto;width:100%}
+
+.sound-card{background:#fff;border-radius:16px;padding:1.2rem .8rem;text-align:center;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 2px 8px rgba(0,0,0,.06);position:relative;overflow:hidden;user-select:none;-webkit-tap-highlight-color:transparent}
+.sound-card:active{transform:scale(.95)}
+.sound-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.sound-card.playing{box-shadow:0 4px 20px rgba(255,152,0,.4)}
+
+.card-emoji{font-size:3rem;display:block;margin-bottom:.5rem;transition:transform .3s}
+.sound-card.playing .card-emoji{animation:cardBounce .4s ease}
+@keyframes cardBounce{0%,100%{transform:scale(1)}30%{transform:scale(1.3) rotate(-5deg)}60%{transform:scale(1.1) rotate(5deg)}}
+
+.card-name{font-size:.95rem;font-weight:700;color:#333;margin-bottom:.2rem}
+.card-count{font-size:.7rem;color:#999}
+
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.6);transform:scale(0);animation:rippleAnim .6s ease-out;pointer-events:none}
+@keyframes rippleAnim{to{transform:scale(4);opacity:0}}
+
+.star{position:absolute;font-size:1.2rem;pointer-events:none;animation:starFly .8s ease-out forwards}
+@keyframes starFly{0%{opacity:1;transform:translate(0,0) scale(0)}50%{opacity:1;transform:translate(var(--x),var(--y)) scale(1.2)}100%{opacity:0;transform:translate(calc(var(--x)*1.5),calc(var(--y)*1.5)) scale(0)}}
+
+/* Volume control */
+.volume-control{position:fixed;bottom:1rem;right:1rem;background:#fff;border-radius:30px;padding:.5rem 1rem;box-shadow:0 4px 20px rgba(0,0,0,.15);display:flex;align-items:center;gap:.5rem;z-index:50;transition:transform .2s}
+.volume-control:active{transform:scale(.95)}
+.volume-icon{font-size:1.2rem;cursor:pointer}
+.volume-slider{width:80px;height:4px;-webkit-appearance:none;appearance:none;background:#FFE0B2;border-radius:2px;outline:none}
+.volume-slider::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:#FF9800;cursor:pointer;box-shadow:0 2px 4px rgba(0,0,0,.2)}
+.volume-slider::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#FF9800;cursor:pointer;border:none;box-shadow:0 2px 4px rgba(0,0,0,.2)}
+
+@media(max-width:480px){.volume-control{bottom:.5rem;right:.5rem;padding:.4rem .8rem}.volume-slider{width:60px}}
 </style>
 </head>
 <body>
-<h1>声音大百科 <div class="sub">数据驱动 · 38种动物</div></h1>
-<div id="cats" class="cats"></div>
-<div id="stats" class="stats"></div>
-<div id="grid" class="grid"><div class="loading">正在加载 manifest.json...</div></div>
+
+<div id="start-screen">
+  <div class="start-emojis">🐶🐱🦁🐘🐦🐋</div>
+  <div class="start-title">声音大百科</div>
+  <div class="start-subtitle">点击声音，认识世界</div>
+  <button class="start-btn" id="start-btn">开始探索</button>
+  <div class="load-progress" id="load-progress">
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+    <div class="progress-text" id="progress-text">准备声音中...</div>
+  </div>
+  <div class="skip-link" id="skip-link" style="display:none">跳过加载</div>
+</div>
+
+<div id="app">
+  <div class="app-header">
+    <div class="app-title">声音大百科</div>
+    <div class="app-subtitle" id="app-subtitle">加载中...</div>
+  </div>
+  <div class="cat-tabs" id="cat-tabs"></div>
+  <div class="sound-grid" id="sound-grid"></div>
+  <div class="volume-control">
+    <span class="volume-icon" id="volume-icon">🔊</span>
+    <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.05" value="0.6">
+  </div>
+</div>
 
 <script>
 let manifest = null;
 let currentCat = 'all';
+let volume = 0.6;
+let activeAudio = null;
+let audioCache = {};
+let currentCard = null;
 
-async function load() {
-  try {
-    const r = await fetch('data/manifest.json');
-    manifest = await r.json();
-    renderCats();
-    renderStats();
-    renderGrid();
-  } catch(e) {
-    document.getElementById('grid').innerHTML =
-      '<div class="loading" style="color:#E24B4A">请通过 HTTP 服务器打开本页面<br><small>终端执行：<br><code>cd sound-encyclopedia && python3 -m http.server 9876 --bind 0.0.0.0</code><br>浏览器访问：http://localhost:9876</small></div>';
-  }
+// ===== START SCREEN =====
+const startScreen = document.getElementById('start-screen');
+const startBtn = document.getElementById('start-btn');
+const loadProgress = document.getElementById('load-progress');
+const progressFill = document.getElementById('progress-fill');
+const progressText = document.getElementById('progress-text');
+const skipLink = document.getElementById('skip-link');
+
+// Floating particles
+const particles = ['🐶','🐱','🦁','🐘','🐦','🐋','🐸','🐝','🌧️','🌊','🌲','🚂'];
+for (let i = 0; i < 12; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  p.textContent = particles[Math.floor(Math.random() * particles.length)];
+  p.style.left = Math.random() * 100 + '%';
+  p.style.animationDuration = (8 + Math.random() * 12) + 's';
+  p.style.animationDelay = (Math.random() * 10) + 's';
+  startScreen.appendChild(p);
 }
 
+startBtn.addEventListener('click', async () => {
+  startBtn.style.display = 'none';
+  loadProgress.style.display = 'flex';
+  skipLink.style.display = 'block';
+
+  try {
+    const res = await fetch('data/manifest.json');
+    manifest = await res.json();
+  } catch(e) {
+    progressText.textContent = '加载失败，请刷新';
+    return;
+  }
+
+  renderCats();
+  renderStats();
+  renderGrid();
+  await preloadAll();
+  enterApp();
+});
+
+skipLink.addEventListener('click', enterApp);
+
+function enterApp() {
+  startScreen.classList.add('hide');
+  setTimeout(() => {
+    startScreen.style.display = 'none';
+    document.getElementById('app').classList.add('show');
+  }, 600);
+}
+
+// ===== PRELOAD =====
+async function preloadAll() {
+  const allFiles = [];
+  manifest.sounds.forEach(s => {
+    s.sounds.forEach(f => allFiles.push(f.file));
+  });
+  const total = allFiles.length;
+  let done = 0;
+
+  return new Promise(resolve => {
+    const container = document.createElement('div');
+    container.style.cssText = 'position:fixed;width:0;height:0;overflow:hidden;pointer-events:none';
+    document.body.appendChild(container);
+
+    const checkDone = () => {
+      done++;
+      const pct = Math.round(done / total * 100);
+      progressFill.style.width = pct + '%';
+      progressText.textContent = '加载声音 ' + done + '/' + total + ' (' + pct + '%)';
+      if (done >= total) { setTimeout(resolve, 300); }
+    };
+
+    allFiles.forEach((file, i) => {
+      const a = document.createElement('audio');
+      a.preload = 'auto';
+      a.volume = volume;
+      a.src = file;
+      container.appendChild(a);
+      audioCache[file] = a;
+      let settled = false;
+      const mark = () => { if (!settled) { settled = true; checkDone(); } };
+      a.addEventListener('canplaythrough', mark, { once: true });
+      a.addEventListener('error', mark, { once: true });
+      setTimeout(mark, 10000);
+    });
+
+    setTimeout(resolve, 30000); // max 30s
+  });
+}
+
+// ===== CATEGORIES =====
 function renderCats() {
-  const cats = document.getElementById('cats');
-  const buttons = [{id:'all',name:'全部',emoji:'🌈'}];
-  manifest.categories.forEach(c => buttons.push({id:c.id,name:c.name_zh,emoji:c.emoji}));
-  cats.innerHTML = buttons.map((b,i) =>
-    '<button class="'+(i===0?'active':'')+'" data-cat="'+b.id+'">'+b.emoji+' '+b.name+'</button>'
+  const cats = document.getElementById('cat-tabs');
+  const buttons = [{ id: 'all', name_zh: '全部', emoji: '🌈' }];
+  manifest.categories.forEach(c => buttons.push(c));
+  cats.innerHTML = buttons.map((b, i) =>
+    '<button class="cat-tab ' + (i === 0 ? 'active' : '') + '" data-cat="' + b.id + '">' + b.emoji + ' ' + b.name_zh + '</button>'
   ).join('');
-  cats.querySelectorAll('button').forEach(b => b.onclick = () => {
-    cats.querySelectorAll('button').forEach(x => x.className = '');
-    b.className = 'active';
-    currentCat = b.dataset.cat;
-    renderGrid();
+  cats.querySelectorAll('.cat-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      cats.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      currentCat = tab.dataset.cat;
+      renderGrid();
+    });
   });
 }
 
 function renderStats() {
-  document.getElementById('stats').textContent =
-    manifest.total_sounds + ' 种声音 · ' + manifest.total_audio_files + ' 个音频 · ' + manifest.version;
+  document.getElementById('app-subtitle').textContent =
+    manifest.total_sounds + ' 种声音 · ' + manifest.total_audio_files + ' 个音频';
 }
 
+// ===== SOUND GRID =====
 function renderGrid() {
-  var grid = document.getElementById('grid');
-  var sounds = currentCat === 'all'
+  const grid = document.getElementById('sound-grid');
+  const sounds = currentCat === 'all'
     ? manifest.sounds
-    : manifest.sounds.filter(function(s) { return s.category === currentCat; });
+    : manifest.sounds.filter(s => s.category === currentCat);
 
   if (!sounds.length) {
-    grid.innerHTML = '<div class="loading">此分类暂无声音，欢迎贡献！</div>';
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:#999">此分类暂无声音，欢迎贡献！</div>';
     return;
   }
 
-  var html = '';
-  sounds.forEach(function(s) {
-    var files = JSON.stringify(s.sounds.map(function(x) { return x.file; }));
-    html += '<div class="card" data-files=\'' + files + '\'>';
-    html += '<span class="emoji">' + s.emoji + '</span>';
-    html += '<div class="name">' + s.name_zh + '</div>';
-    html += '<div class="count">' + s.sounds.length + ' 个声音</div>';
-    html += '</div>';
-  });
-  grid.innerHTML = html;
+  grid.innerHTML = sounds.map(s => {
+    const files = JSON.stringify(s.sounds.map(x => x.file));
+    return '<div class="sound-card" data-files=\'' + files + '\' data-emoji="' + s.emoji + '">' +
+      '<span class="card-emoji">' + s.emoji + '</span>' +
+      '<div class="card-name">' + s.name_zh + '</div>' +
+      '<div class="card-count">' + s.sounds.length + ' 个声音</div>' +
+    '</div>';
+  }).join('');
 
-  var activeAudio = null;
-  grid.querySelectorAll('.card').forEach(function(card) {
-    card.onclick = function() {
-      var files = JSON.parse(card.dataset.files);
-      if (!files.length) return;
-      var f = files[Math.floor(Math.random() * files.length)];
-      if (activeAudio) { activeAudio.pause(); activeAudio = null; }
-      var audio = new Audio(f);
-      audio.play().catch(function() {});
-      activeAudio = audio;
-      card.classList.add('playing');
-      audio.onended = function() { card.classList.remove('playing'); activeAudio = null; };
-      setTimeout(function() { if (!audio.ended) card.classList.remove('playing'); }, 400);
-    };
+  grid.querySelectorAll('.sound-card').forEach(card => {
+    card.addEventListener('click', () => playSound(card));
   });
 }
 
-load();
+// ===== PLAY SOUND =====
+function playSound(card) {
+  const files = JSON.parse(card.dataset.files);
+  if (!files.length) return;
+  const file = files[Math.floor(Math.random() * files.length)];
+
+  if (activeAudio) {
+    activeAudio.pause();
+    activeAudio.currentTime = 0;
+  }
+  if (currentCard) currentCard.classList.remove('playing');
+
+  const audio = audioCache[file] || new Audio(file);
+  audio.volume = volume;
+  audio.currentTime = 0;
+  audio.play().catch(() => {});
+  activeAudio = audio;
+  currentCard = card;
+  card.classList.add('playing');
+
+  // Ripple
+  const rect = card.getBoundingClientRect();
+  const ripple = document.createElement('div');
+  ripple.className = 'ripple';
+  ripple.style.width = ripple.style.height = '50px';
+  ripple.style.left = (rect.width / 2 - 25) + 'px';
+  ripple.style.top = (rect.height / 2 - 25) + 'px';
+  card.appendChild(ripple);
+  setTimeout(() => ripple.remove(), 600);
+
+  // Stars
+  const emoji = card.dataset.emoji || '⭐';
+  for (let i = 0; i < 6; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.textContent = ['✨', '⭐', '🌟', emoji][Math.floor(Math.random() * 4)];
+    const angle = (Math.PI * 2 * i) / 6;
+    const dist = 60 + Math.random() * 40;
+    star.style.setProperty('--x', Math.cos(angle) * dist + 'px');
+    star.style.setProperty('--y', Math.sin(angle) * dist + 'px');
+    star.style.left = '50%';
+    star.style.top = '50%';
+    card.appendChild(star);
+    setTimeout(() => star.remove(), 800);
+  }
+
+  audio.onended = () => {
+    card.classList.remove('playing');
+    activeAudio = null;
+    currentCard = null;
+  };
+}
+
+// ===== VOLUME =====
+const volumeSlider = document.getElementById('volume-slider');
+const volumeIcon = document.getElementById('volume-icon');
+
+volumeSlider.addEventListener('input', e => {
+  volume = parseFloat(e.target.value);
+  Object.values(audioCache).forEach(a => { if (a) a.volume = volume; });
+  if (activeAudio) activeAudio.volume = volume;
+  volumeIcon.textContent = volume === 0 ? '🔇' : volume < 0.4 ? '🔉' : '🔊';
+});
+
+volumeIcon.addEventListener('click', () => {
+  if (volume > 0) {
+    volumeSlider.dataset.prev = volume;
+    volume = 0;
+  } else {
+    volume = parseFloat(volumeSlider.dataset.prev || 0.6);
+  }
+  volumeSlider.value = volume;
+  volumeSlider.dispatchEvent(new Event('input'));
+});
+
+// ===== SERVICE WORKER =====
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
 </script>
 </body>
 </html>
