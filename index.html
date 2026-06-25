@@ -1,359 +1,1693 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
-<meta name="theme-color" content="#FF9800">
-<title>声音大百科</title>
-<style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
-body{background:#FFF8E1;overflow-x:hidden;min-height:100vh}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#FF9800">
+  <title>声音大百科 - 沉浸式儿童声音探索与科普平台</title>
+  <meta name="description" content="声音大百科收集真实的动物、自然、交通和生活声音，专为1-6岁儿童设计。真实的自然声音，极简的交互，配有妙趣横生的儿童科普，开启宝宝的探索世界之旅。">
+  <meta name="keywords" content="儿童声音,大自然声音,声音百科,亲子教育,动物叫声,早教声音库">
+  
+  <!-- SEO Open Graph -->
+  <meta property="og:title" content="声音大百科 - 沉浸式儿童声音探索与科普">
+  <meta property="og:description" content="收集真实世界的声音，激发孩子无限想象力。">
+  <meta property="og:type" content="website">
 
-/* ===== START SCREEN ===== */
-#start-screen{position:fixed;inset:0;z-index:1000;background:linear-gradient(135deg,#FF9800 0%,#FFC107 40%,#4CAF50 70%,#03A9F4 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s,transform .6s}
-#start-screen.hide{opacity:0;transform:scale(1.1);pointer-events:none}
-.start-title{font-size:clamp(2.2rem,8vw,4rem);font-weight:900;color:#fff;text-shadow:3px 3px 0 rgba(0,0,0,.2),0 0 40px rgba(255,255,255,.3);margin-bottom:1.5rem;letter-spacing:.05em}
-.start-subtitle{font-size:clamp(1rem,3vw,1.4rem);color:rgba(255,255,255,.9);margin-bottom:2rem;text-shadow:1px 1px 0 rgba(0,0,0,.1)}
-.start-emojis{font-size:clamp(2.5rem,10vw,5rem);margin-bottom:2rem;animation:floatEmoji 3s ease-in-out infinite}
-@keyframes floatEmoji{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
-.start-btn{background:#fff;color:#FF6F00;border:none;border-radius:50px;padding:1rem 3rem;font-size:clamp(1.2rem,4vw,1.8rem);font-weight:800;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,.2);transition:transform .15s;position:relative;overflow:hidden}
-.start-btn:active{transform:scale(.95)}
-.start-btn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.4) 50%,transparent 60%);animation:btnShine 3s infinite}
-@keyframes btnShine{0%{transform:translateX(-100%)}30%,100%{transform:translateX(100%)}}
-
-.load-progress{display:none;flex-direction:column;align-items:center;margin-top:1.5rem;width:80%;max-width:300px}
-.progress-bar{width:100%;height:14px;background:rgba(255,255,255,.3);border-radius:7px;overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,.1)}
-.progress-fill{height:100%;background:linear-gradient(90deg,#4CAF50,#8BC34A,#CDDC39);border-radius:7px;transition:width .3s ease;width:0%;position:relative}
-.progress-fill::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);animation:progressShine 1.5s infinite}
-@keyframes progressShine{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
-.progress-text{color:rgba(255,255,255,.9);font-size:.9rem;margin-top:.6rem;text-shadow:1px 1px 0 rgba(0,0,0,.1)}
-.skip-link{color:rgba(255,255,255,.6);font-size:.8rem;margin-top:.8rem;cursor:pointer;text-decoration:underline}
-.skip-link:hover{color:#fff}
-
-.particle{position:absolute;font-size:2rem;opacity:.6;animation:particleFloat linear infinite;pointer-events:none}
-@keyframes particleFloat{0%{transform:translateY(100vh) rotate(0deg)}100%{transform:translateY(-10vh) rotate(360deg)}}
-
-/* ===== MAIN APP ===== */
-#app{display:none;flex-direction:column;min-height:100vh}
-#app.show{display:flex}
-
-.app-header{text-align:center;padding:.8rem 1rem;background:linear-gradient(135deg,#FF9800,#FFC107);color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.1)}
-.app-title{font-size:clamp(1.3rem,4vw,2rem);font-weight:900;text-shadow:1px 1px 0 rgba(0,0,0,.1)}
-.app-subtitle{font-size:.8rem;opacity:.8;margin-top:.2rem}
-
-.cat-tabs{display:flex;gap:.5rem;padding:.6rem 1rem;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;background:#FFF3E0;position:sticky;top:3.2rem;z-index:99}
-.cat-tabs::-webkit-scrollbar{display:none}
-.cat-tab{flex-shrink:0;padding:.5rem 1rem;border-radius:25px;border:2px solid #FFE0B2;background:#fff;font-size:clamp(.85rem,2.5vw,1rem);font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:.3rem}
-.cat-tab.active{background:#FF9800;color:#fff;border-color:#FF9800;box-shadow:0 2px 8px rgba(255,152,0,.3)}
-.cat-tab:active{transform:scale(.95)}
-
-.sound-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:1rem;padding:1rem;max-width:1200px;margin:0 auto;width:100%}
-
-.sound-card{background:#fff;border-radius:16px;padding:1.2rem .8rem;text-align:center;cursor:pointer;transition:transform .2s,box-shadow .2s;box-shadow:0 2px 8px rgba(0,0,0,.06);position:relative;overflow:hidden;user-select:none;-webkit-tap-highlight-color:transparent}
-.sound-card:active{transform:scale(.95)}
-.sound-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1)}
-.sound-card.playing{box-shadow:0 4px 20px rgba(255,152,0,.4)}
-.sound-card.played{border:2px solid #A5D6A7}
-
-.card-emoji{font-size:3rem;display:block;margin-bottom:.5rem;transition:transform .3s}
-.sound-card.playing .card-emoji{animation:cardBounce .4s ease}
-@keyframes cardBounce{0%,100%{transform:scale(1)}30%{transform:scale(1.3) rotate(-5deg)}60%{transform:scale(1.1) rotate(5deg)}}
-
-.card-name{font-size:.95rem;font-weight:700;color:#333;margin-bottom:.2rem}
-.card-count{font-size:.7rem;color:#999}
-.card-loading{position:absolute;top:4px;right:4px;width:14px;height:14px;border:2px solid #FF9800;border-top-color:transparent;border-radius:50%;animation:spin .8s linear infinite;display:none}
-.sound-card.loading .card-loading{display:block}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* Fun fact panel */
-.fun-fact{margin-top:.5rem;padding:.5rem;background:#FFFDE7;border-radius:8px;font-size:.75rem;color:#5D4037;line-height:1.4;display:none;border-left:3px solid #FFC107}
-.sound-card.show-fact .fun-fact{display:block}
-
-.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.6);transform:scale(0);animation:rippleAnim .6s ease-out;pointer-events:none}
-@keyframes rippleAnim{to{transform:scale(4);opacity:0}}
-
-.star{position:absolute;font-size:1.2rem;pointer-events:none;animation:starFly .8s ease-out forwards}
-@keyframes starFly{0%{opacity:1;transform:translate(0,0) scale(0)}50%{opacity:1;transform:translate(var(--x),var(--y)) scale(1.2)}100%{opacity:0;transform:translate(calc(var(--x)*1.5),calc(var(--y)*1.5)) scale(0)}}
-
-/* Volume control */
-.volume-control{position:fixed;bottom:1rem;right:1rem;background:#fff;border-radius:30px;padding:.5rem 1rem;box-shadow:0 4px 20px rgba(0,0,0,.15);display:flex;align-items:center;gap:.5rem;z-index:50;transition:transform .2s}
-.volume-control:active{transform:scale(.95)}
-.volume-icon{font-size:1.2rem;cursor:pointer}
-.volume-slider{width:80px;height:4px;-webkit-appearance:none;appearance:none;background:#FFE0B2;border-radius:2px;outline:none}
-.volume-slider::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:#FF9800;cursor:pointer;box-shadow:0 2px 4px rgba(0,0,0,.2)}
-.volume-slider::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#FF9800;cursor:pointer;border:none;box-shadow:0 2px 4px rgba(0,0,0,.2)}
-
-/* Toast */
-.toast{position:fixed;bottom:5rem;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.75);color:#fff;padding:.6rem 1.2rem;border-radius:20px;font-size:.85rem;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none}
-.toast.show{opacity:1}
-
-@media(max-width:480px){.volume-control{bottom:.5rem;right:.5rem;padding:.4rem .8rem}.volume-slider{width:60px}}
-</style>
-</head>
-<body>
-
-<div id="start-screen">
-  <div class="start-emojis">🐶🐱🦁🐘🐦🐋</div>
-  <div class="start-title">声音大百科</div>
-  <div class="start-subtitle">点击声音，认识世界</div>
-  <button class="start-btn" id="start-btn">开始探索</button>
-  <div class="load-progress" id="load-progress">
-    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
-    <div class="progress-text" id="progress-text">准备中...</div>
-  </div>
-  <div class="skip-link" id="skip-link" style="display:none">直接进入</div>
-</div>
-
-<div id="app">
-  <div class="app-header">
-    <div class="app-title">声音大百科</div>
-    <div class="app-subtitle" id="app-subtitle">加载中...</div>
-  </div>
-  <div class="cat-tabs" id="cat-tabs"></div>
-  <div class="sound-grid" id="sound-grid"></div>
-  <div class="volume-control">
-    <span class="volume-icon" id="volume-icon">🔊</span>
-    <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.05" value="0.6">
-  </div>
-  <div class="toast" id="toast"></div>
-</div>
-
-<script>
-let manifest = null;
-let currentCat = 'all';
-let volume = 0.6;
-let activeAudio = null;
-let audioCache = {};
-let currentCard = null;
-let playedSet = new Set();
-
-// ===== START SCREEN =====
-const startScreen = document.getElementById('start-screen');
-const startBtn = document.getElementById('start-btn');
-const loadProgress = document.getElementById('load-progress');
-const progressFill = document.getElementById('progress-fill');
-const progressText = document.getElementById('progress-text');
-const skipLink = document.getElementById('skip-link');
-
-// Floating particles
-const particles = ['🐶','🐱','🦁','🐘','🐦','🐋','🐸','🐝','🌧️','🌊','🌲','🚂'];
-for (let i = 0; i < 12; i++) {
-  const p = document.createElement('div');
-  p.className = 'particle';
-  p.textContent = particles[Math.floor(Math.random() * particles.length)];
-  p.style.left = Math.random() * 100 + '%';
-  p.style.animationDuration = (8 + Math.random() * 12) + 's';
-  p.style.animationDelay = (Math.random() * 10) + 's';
-  startScreen.appendChild(p);
-}
-
-startBtn.addEventListener('click', async () => {
-  startBtn.style.display = 'none';
-  loadProgress.style.display = 'flex';
-  progressText.textContent = '加载中...';
-
-  try {
-    const res = await fetch('data/manifest.json');
-    manifest = await res.json();
-  } catch(e) {
-    progressText.textContent = '加载失败，请检查网络后刷新';
-    return;
-  }
-
-  renderCats();
-  renderStats();
-  renderGrid();
-  // 不预加载任何音频，真正的懒加载：点哪个加载哪个
-  enterApp();
-});
-
-skipLink.addEventListener('click', enterApp);
-
-function enterApp() {
-  startScreen.classList.add('hide');
-  setTimeout(() => {
-    startScreen.style.display = 'none';
-    document.getElementById('app').classList.add('show');
-  }, 600);
-}
-
-// ===== LAZY LOAD SINGLE AUDIO =====
-function getAudio(file) {
-  if (audioCache[file]) {
-    return audioCache[file];
-  }
-  const audio = new Audio(file);
-  audio.preload = 'auto';
-  audio.volume = volume;
-  audioCache[file] = audio;
-  return audio;
-}
-
-// ===== CATEGORIES (only show categories with data) =====
-function renderCats() {
-  const cats = document.getElementById('cat-tabs');
-  const buttons = [{ id: 'all', name_zh: '全部', emoji: '🌈' }];
-
-  // 只显示有声音的分类
-  manifest.categories.forEach(c => {
-    const hasData = manifest.sounds.some(s => s.category === c.id);
-    if (hasData) buttons.push(c);
-  });
-
-  cats.innerHTML = buttons.map((b, i) =>
-    '<button class="cat-tab ' + (i === 0 ? 'active' : '') + '" data-cat="' + b.id + '">' + b.emoji + ' ' + b.name_zh + '</button>'
-  ).join('');
-  cats.querySelectorAll('.cat-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      cats.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      currentCat = tab.dataset.cat;
-      renderGrid();
-    });
-  });
-}
-
-function renderStats() {
-  document.getElementById('app-subtitle').textContent =
-    manifest.total_sounds + ' 种声音 · ' + manifest.total_audio_files + ' 个音频';
-}
-
-// ===== SOUND GRID =====
-function renderGrid() {
-  const grid = document.getElementById('sound-grid');
-  const sounds = currentCat === 'all'
-    ? manifest.sounds
-    : manifest.sounds.filter(s => s.category === currentCat);
-
-  if (!sounds.length) {
-    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:#999">此分类暂无声音，欢迎贡献！</div>';
-    return;
-  }
-
-  grid.innerHTML = sounds.map(s => {
-    const files = JSON.stringify(s.sounds.map(x => x.file));
-    const funFact = s.fun_fact || '';
-    const played = playedSet.has(s.id);
-    return '<div class="sound-card' + (played ? ' played' : '') + '" data-files=\'' + files + '\' data-emoji="' + s.emoji + '" data-id="' + s.id + '" data-fact="' + funFact.replace(/"/g, '&quot;') + '">' +
-      '<div class="card-loading"></div>' +
-      '<span class="card-emoji">' + s.emoji + '</span>' +
-      '<div class="card-name">' + s.name_zh + '</div>' +
-      '<div class="card-count">' + s.sounds.length + ' 个声音</div>' +
-      (funFact ? '<div class="fun-fact">' + funFact + '</div>' : '') +
-    '</div>';
-  }).join('');
-
-  grid.querySelectorAll('.sound-card').forEach(card => {
-    card.addEventListener('click', () => playSound(card));
-  });
-}
-
-// ===== PLAY SOUND (instant feedback, browser handles buffering) =====
-function playSound(card) {
-  const files = JSON.parse(card.dataset.files);
-  if (!files.length) return;
-  const file = files[Math.floor(Math.random() * files.length)];
-
-  // 停止当前播放
-  if (activeAudio) {
-    activeAudio.pause();
-    activeAudio.currentTime = 0;
-  }
-  if (currentCard) currentCard.classList.remove('playing');
-
-  // 立即获取或创建音频对象
-  const audio = getAudio(file);
-  audio.volume = volume;
-  audio.currentTime = 0;
-
-  // 立即给视觉反馈
-  activeAudio = audio;
-  currentCard = card;
-  card.classList.add('playing');
-  card.classList.add('played');
-  playedSet.add(card.dataset.id);
-
-  // 直接播放，浏览器自动缓冲
-  audio.play().catch(() => {
-    showToast('点击页面后再试一次');
-  });
-
-  // Ripple
-  const rect = card.getBoundingClientRect();
-  const ripple = document.createElement('div');
-  ripple.className = 'ripple';
-  ripple.style.width = ripple.style.height = '50px';
-  ripple.style.left = (rect.width / 2 - 25) + 'px';
-  ripple.style.top = (rect.height / 2 - 25) + 'px';
-  card.appendChild(ripple);
-  setTimeout(() => ripple.remove(), 600);
-
-  // Stars
-  const emoji = card.dataset.emoji || '⭐';
-  for (let i = 0; i < 6; i++) {
-    const star = document.createElement('div');
-    star.className = 'star';
-    star.textContent = ['✨', '⭐', '🌟', emoji][Math.floor(Math.random() * 4)];
-    const angle = (Math.PI * 2 * i) / 6;
-    const dist = 60 + Math.random() * 40;
-    star.style.setProperty('--x', Math.cos(angle) * dist + 'px');
-    star.style.setProperty('--y', Math.sin(angle) * dist + 'px');
-    star.style.left = '50%';
-    star.style.top = '50%';
-    card.appendChild(star);
-    setTimeout(() => star.remove(), 800);
-  }
-
-  // 显示科普文案（播放后展开）
-  const fact = card.dataset.fact;
-  if (fact) {
-    setTimeout(() => card.classList.add('show-fact'), 300);
-  }
-
-  audio.onended = () => {
-    card.classList.remove('playing');
-    if (activeAudio === audio) {
-      activeAudio = null;
-      currentCard = null;
+  <!-- 系统字体：零依赖，加载零延迟 -->
+  <style>
+    /* ===== CSS DESIGN SYSTEM & TOKENS ===== */
+    :root {
+      --primary: #FF9800;
+      --primary-rgb: 255, 152, 0;
+      --primary-gradient: linear-gradient(135deg, #FF9800 0%, #FF5722 100%);
+      --bg-gradient: linear-gradient(135deg, #FFF8E1 0%, #FFE0B2 100%);
+      
+      --card-bg: rgba(255, 255, 255, 0.45);
+      --card-border: rgba(255, 255, 255, 0.5);
+      --card-shadow: 0 8px 32px 0 rgba(142, 93, 56, 0.08);
+      
+      --text-main: #3E2723;
+      --text-muted: #795548;
+      
+      --radius-sm: 12px;
+      --radius-md: 20px;
+      --radius-lg: 32px;
+      
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
-  };
-}
 
-// ===== TOAST =====
-function showToast(msg) {
-  const toast = document.getElementById('toast');
-  toast.textContent = msg;
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2500);
-}
+    body.cat-animals {
+      --primary: #FF6F00;
+      --primary-rgb: 255, 111, 0;
+      --primary-gradient: linear-gradient(135deg, #FF9800 0%, #E65100 100%);
+      --bg-gradient: linear-gradient(135deg, #FFF9C4 0%, #FFE0B2 100%);
+    }
 
-// ===== VOLUME =====
-const volumeSlider = document.getElementById('volume-slider');
-const volumeIcon = document.getElementById('volume-icon');
+    body.cat-nature {
+      --primary: #2E7D32;
+      --primary-rgb: 46, 125, 50;
+      --primary-gradient: linear-gradient(135deg, #4CAF50 0%, #1B5E20 100%);
+      --bg-gradient: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+    }
 
-volumeSlider.addEventListener('input', e => {
-  volume = parseFloat(e.target.value);
-  Object.values(audioCache).forEach(a => { if (a) a.volume = volume; });
-  if (activeAudio) activeAudio.volume = volume;
-  volumeIcon.textContent = volume === 0 ? '🔇' : volume < 0.4 ? '🔉' : '🔊';
-});
+    body.cat-transport {
+      --primary: #1565C0;
+      --primary-rgb: 21, 101, 192;
+      --primary-gradient: linear-gradient(135deg, #2196F3 0%, #0D47A1 100%);
+      --bg-gradient: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+    }
 
-volumeIcon.addEventListener('click', () => {
-  if (volume > 0) {
-    volumeSlider.dataset.prev = volume;
-    volume = 0;
-  } else {
-    volume = parseFloat(volumeSlider.dataset.prev || 0.6);
-  }
-  volumeSlider.value = volume;
-  volumeSlider.dispatchEvent(new Event('input'));
-});
+    body.cat-life {
+      --primary: #6A1B9A;
+      --primary-rgb: 106, 27, 154;
+      --primary-gradient: linear-gradient(135deg, #9C27B0 0%, #4A148C 100%);
+      --bg-gradient: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%);
+    }
 
-// ===== SERVICE WORKER =====
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').catch(() => {});
-}
-</script>
+    /* Reset */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", Roboto, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-user-select: none;
+      user-select: none;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 0.6s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== START SCREEN ===== */
+    #start-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: linear-gradient(135deg, #FF9800 0%, #FF5722 50%, #E040FB 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.8s cubic-bezier(0.77, 0, 0.175, 1), transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+      padding: 2rem;
+    }
+
+    #start-screen.hide {
+      opacity: 0;
+      transform: scale(1.08) translateY(-30px);
+      pointer-events: none;
+    }
+
+    .start-canvas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .start-card {
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2rem;
+      width: 100%;
+      max-width: 460px;
+      text-align: center;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.15);
+    }
+
+    .start-emojis {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.2rem;
+      animation: bounceFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes bounceFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(3deg); }
+    }
+
+    .start-title {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: #fff;
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .start-subtitle {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 2.5rem;
+      font-weight: 500;
+    }
+
+    .start-btn {
+      background: #fff;
+      color: #FF5722;
+      border: none;
+      border-radius: 50px;
+      padding: 1.2rem 3.5rem;
+      font-size: 1.4rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      transition: all 0.25s ease;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .start-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    }
+
+    .start-btn:active {
+      transform: translateY(1px);
+    }
+
+    .start-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 35%, rgba(255, 255, 255, 0.4) 50%, transparent 65%);
+      animation: btnShine 2.5s infinite;
+      transform: translateX(-100%);
+    }
+
+    @keyframes btnShine {
+      0% { transform: translateX(-100%); }
+      25%, 100% { transform: translateX(100%); }
+    }
+
+    .load-progress {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 2rem;
+      width: 100%;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #4CAF50, #8BC34A, #CDDC39);
+      border-radius: 6px;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+
+    .progress-text {
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 0.95rem;
+      margin-top: 0.8rem;
+      font-weight: 500;
+    }
+
+    /* ===== MAIN APP CONTAINER ===== */
+    #app {
+      display: none;
+      flex-direction: column;
+      min-height: 100vh;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    #app.show {
+      display: flex;
+      opacity: 1;
+    }
+
+    /* Header & Navigation */
+    .app-header {
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.35);
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0.8rem 1.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .logo-area {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-title {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .app-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-top: 0.1rem;
+    }
+
+    /* Search Input Box */
+    .search-wrapper {
+      position: relative;
+      flex: 1;
+      max-width: 320px;
+      min-width: 200px;
+    }
+
+    .search-input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.5);
+      border: 1.5px solid var(--card-border);
+      border-radius: 50px;
+      padding: 0.6rem 1rem 0.6rem 2.5rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-main);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .search-input::placeholder {
+      color: var(--text-muted);
+      opacity: 0.6;
+    }
+
+    .search-input:focus {
+      background: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.1);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.95rem;
+      pointer-events: none;
+    }
+
+    /* Achieve Progress Card & Action Banner */
+    .dashboard-banner {
+      max-width: 1200px;
+      margin: 1.5rem auto 0 auto;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    .dashboard-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 1.2rem;
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      box-shadow: var(--card-shadow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .progress-info {
+      flex: 1;
+      min-width: 240px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .progress-track-bg {
+      width: 100%;
+      height: 10px;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress-track-fill {
+      height: 100%;
+      background: var(--primary-gradient);
+      border-radius: 5px;
+      width: 0%;
+      transition: width 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .action-btn {
+      background: #fff;
+      border: 1.5px solid var(--card-border);
+      border-radius: 50px;
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      transition: var(--transition);
+    }
+
+    .action-btn:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .action-btn:active {
+      transform: translateY(0);
+    }
+
+    /* Category Tabs Navigation */
+    .nav-container {
+      max-width: 1200px;
+      margin: 1.2rem auto 0 auto;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    .cat-tabs {
+      display: flex;
+      gap: 0.8rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 0.4rem;
+    }
+
+    .cat-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .cat-tab {
+      flex-shrink: 0;
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .cat-tab.active {
+      background: var(--primary-gradient);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 8px 20px rgba(var(--primary-rgb), 0.25);
+      transform: translateY(-2px);
+    }
+
+    /* Subcategory navigation container */
+    .subcat-tabs {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 0.6rem 0;
+      margin-top: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .subcat-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .subcat-tab {
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      border: 1.5px solid transparent;
+      background: rgba(255, 255, 255, 0.3);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .subcat-tab.active {
+      background: #fff;
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    /* ===== SOUND GRID ===== */
+    .grid-container {
+      flex: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem 10rem 1.5rem;
+      width: 100%;
+    }
+
+    .sound-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 1.2rem;
+    }
+
+    /* Skeleton Screen */
+    .skeleton-card {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: var(--radius-md);
+      height: 180px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skeleton-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      animation: skeletonShine 1.5s infinite;
+    }
+
+    @keyframes skeletonShine {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* Sound Card */
+    .sound-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: var(--card-shadow);
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .sound-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 12px 32px rgba(142, 93, 56, 0.14);
+      border-color: rgba(var(--primary-rgb), 0.3);
+    }
+
+    .sound-card:active {
+      transform: translateY(-2px) scale(0.98);
+    }
+
+    .sound-card.playing {
+      border-color: var(--primary);
+      box-shadow: 0 8px 24px rgba(var(--primary-rgb), 0.2);
+      animation: pulsePlaying 2s infinite alternate;
+    }
+
+    @keyframes pulsePlaying {
+      0% { box-shadow: 0 8px 24px rgba(var(--primary-rgb), 0.15); }
+      100% { box-shadow: 0 8px 32px rgba(var(--primary-rgb), 0.35); }
+    }
+
+    .sound-card.played::after {
+      content: '⭐';
+      position: absolute;
+      top: 8px;
+      left: 10px;
+      font-size: 0.9rem;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+    }
+
+    /* Card Favorite button */
+    .card-fav-btn {
+      position: absolute;
+      top: 6px;
+      right: 8px;
+      font-size: 1.1rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      z-index: 10;
+      padding: 4px;
+    }
+
+    .card-fav-btn:hover {
+      transform: scale(1.2);
+    }
+
+    .card-emoji {
+      font-size: 3.2rem;
+      display: block;
+      margin-bottom: 0.8rem;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .sound-card.playing .card-emoji {
+      animation: emojiDance 0.8s infinite alternate ease-in-out;
+    }
+
+    @keyframes emojiDance {
+      0% { transform: scale(1) rotate(-8deg); }
+      100% { transform: scale(1.18) rotate(8deg); }
+    }
+
+    .card-name {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 0.1rem;
+    }
+
+    .card-name-en {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Wave visualizer inside card */
+    .card-wave {
+      display: none;
+      justify-content: center;
+      align-items: flex-end;
+      height: 16px;
+      gap: 3px;
+      margin-top: 0.8rem;
+    }
+
+    .sound-card.playing .card-wave {
+      display: flex;
+    }
+
+    .card-wave span {
+      width: 2.5px;
+      height: 3px;
+      background-color: var(--primary);
+      border-radius: 20px;
+      animation: wavePulse 0.8s ease-in-out infinite alternate;
+    }
+
+    .card-wave span:nth-child(1) { animation-delay: 0.1s; }
+    .card-wave span:nth-child(2) { animation-delay: 0.3s; }
+    .card-wave span:nth-child(3) { animation-delay: 0.2s; }
+    .card-wave span:nth-child(4) { animation-delay: 0.4s; }
+
+    @keyframes wavePulse {
+      0% { height: 3px; }
+      100% { height: 14px; }
+    }
+
+    /* Star fly particles on click */
+    .star-particle {
+      position: absolute;
+      pointer-events: none;
+      font-size: 1.2rem;
+      z-index: 50;
+      animation: starFlyOut 0.8s ease-out forwards;
+    }
+
+    @keyframes starFlyOut {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(0);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--x), var(--y)) scale(1.2) rotate(360deg);
+      }
+    }
+
+    /* ===== DISCOVERY FLOATING PANEL (BOTTOM SHEET) ===== */
+    .discovery-panel {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 100%);
+      width: 90%;
+      max-width: 600px;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border: 1px solid var(--card-border);
+      border-bottom: none;
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
+      z-index: 90;
+      transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .discovery-panel.show {
+      transform: translate(-50%, 0);
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .panel-profile {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .panel-emoji {
+      font-size: 2.8rem;
+      animation: pulseGrow 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseGrow {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.15); }
+    }
+
+    .panel-titles {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panel-name {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--text-main);
+    }
+
+    .panel-name-en {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .panel-controls {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .panel-btn {
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid var(--card-border);
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+
+    .panel-btn:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .panel-content {
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: var(--radius-sm);
+      padding: 1rem;
+      border-left: 4px solid var(--primary);
+    }
+
+    .panel-label {
+      font-size: 0.75rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary);
+      margin-bottom: 0.3rem;
+    }
+
+    .panel-fact {
+      font-size: 0.95rem;
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--text-main);
+    }
+
+    .panel-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      opacity: 0.8;
+      border-top: 1px solid rgba(0,0,0,0.05);
+      padding-top: 0.6rem;
+    }
+
+    .panel-tags {
+      display: flex;
+      gap: 0.3rem;
+    }
+
+    .panel-tag {
+      background: rgba(255, 255, 255, 0.5);
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+    }
+
+    /* ===== FLOATING ACTION CONTROLS ===== */
+    .controls-group {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      z-index: 95;
+    }
+
+    .volume-panel {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid var(--card-border);
+      border-radius: 30px;
+      padding: 0.6rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      transition: var(--transition);
+    }
+
+    .volume-slider {
+      width: 0px;
+      height: 4px;
+      -webkit-appearance: none;
+      appearance: none;
+      background: rgba(0,0,0,0.1);
+      border-radius: 3px;
+      outline: none;
+      transition: width 0.3s ease;
+    }
+
+    .volume-panel:hover .volume-slider, 
+    .volume-slider:active {
+      width: 80px;
+    }
+
+    .volume-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--primary);
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .volume-icon {
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    /* Global Toast */
+    .toast {
+      position: fixed;
+      bottom: 7rem;
+      left: 50%;
+      transform: translate(-50%, 20px);
+      background: rgba(62, 39, 35, 0.9);
+      color: #fff;
+      padding: 0.8rem 1.6rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    /* Empty state */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .empty-emoji {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .empty-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+    }
+
+    .empty-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Screen Size Adapters */
+    @media (max-width: 600px) {
+      .header-content {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .search-wrapper {
+        max-width: 100%;
+      }
+      .cat-tab {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.95rem;
+      }
+      .discovery-panel {
+        width: 100%;
+        border-radius: var(--radius-md) var(--radius-md) 0 0;
+      }
+      .controls-group {
+        bottom: calc(env(safe-area-inset-bottom) + 0.8rem);
+        right: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body class="cat-all">
+
+  <!-- ===== START PRELOAD SCREEN ===== -->
+  <div id="start-screen">
+    <canvas class="start-canvas" id="start-canvas"></canvas>
+    <div class="start-card">
+      <div class="start-emojis">🐶🌧️🚂🎸</div>
+      <h1 class="start-title">声音大百科</h1>
+      <p class="start-subtitle">倾听万物奇妙，点亮认知星空</p>
+      <button class="start-btn" id="start-btn">开启奇妙探索</button>
+      <div class="load-progress" id="load-progress">
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+        <div class="progress-text" id="progress-text">准备探索世界中...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MAIN APP WINDOW ===== -->
+  <main id="app">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-content">
+        <div class="logo-area">
+          <h1 class="app-title">🐾 声音大百科</h1>
+          <span class="app-subtitle" id="app-stats">数据读取中...</span>
+        </div>
+        
+        <!-- Search Input -->
+        <div class="search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input type="search" class="search-input" id="search-input" placeholder="输入名称、拼音或标签..." aria-label="搜索声音">
+        </div>
+      </div>
+    </header>
+
+    <!-- Explorer progress & achievement banner -->
+    <section class="dashboard-banner">
+      <div class="dashboard-card">
+        <div class="progress-info">
+          <div class="progress-meta">
+            <span id="explore-progress-text">探索进度: 0/0 (0%)</span>
+            <span id="explore-medal-icon">🎖️ 声音见习生</span>
+          </div>
+          <div class="progress-track-bg">
+            <div class="progress-track-fill" id="progress-track-fill"></div>
+          </div>
+        </div>
+        
+        <div class="action-buttons">
+          <button class="action-btn" id="shuffle-btn" title="随机探索一种声音">
+            <span>🎲</span> 随机探索
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category Sliding Navigation -->
+    <nav class="nav-container">
+      <div class="cat-tabs" id="cat-tabs" role="tablist"></div>
+      <div class="subcat-tabs" id="subcat-tabs"></div>
+    </nav>
+
+    <!-- Grid List -->
+    <section class="grid-container">
+      <div class="sound-grid" id="sound-grid">
+        <!-- Skeleton place holders -->
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+      </div>
+    </section>
+
+    <!-- ===== DISCOVERY BOTTOM SHEET PANEL ===== -->
+    <section class="discovery-panel" id="discovery-panel">
+      <div class="panel-header">
+        <div class="panel-profile">
+          <span class="panel-emoji" id="panel-emoji">🐾</span>
+          <div class="panel-titles">
+            <span class="panel-name" id="panel-name">声音物种</span>
+            <span class="panel-name-en" id="panel-name-en">SPECIES</span>
+          </div>
+        </div>
+        <div class="panel-controls">
+          <button class="panel-btn" id="panel-replay-btn" title="再次播放">🔊</button>
+          <button class="panel-btn" id="panel-close-btn" title="关闭面板">✕</button>
+        </div>
+      </div>
+      
+      <div class="panel-content">
+        <div class="panel-label">💡 宝宝科普小卡片</div>
+        <p class="panel-fact" id="panel-fact">正在准备科普知识...</p>
+      </div>
+      
+      <div class="panel-footer">
+        <div class="panel-tags" id="panel-tags">
+          <span class="panel-tag">百科</span>
+        </div>
+        <span id="panel-author">贡献者: --</span>
+      </div>
+    </section>
+
+    <!-- Floating volume widget -->
+    <div class="controls-group">
+      <div class="volume-panel">
+        <span class="volume-icon" id="volume-icon">🔊</span>
+        <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.05" value="0.6" aria-label="音量控制">
+      </div>
+    </div>
+
+    <!-- Toast alerts -->
+    <div class="toast" id="toast">提示信息</div>
+  </main>
+
+  <script>
+    // ===== SYSTEM VARIABLES =====
+    let manifest = null;
+    let currentMainCat = 'all';
+    let currentSubCat = 'all';
+    let searchQuery = '';
+    let activeAudio = null;
+    let activeCard = null;
+    let audioCache = {};
+    let volume = 0.6;
+    
+    // User local progress cache
+    let playedSet = new Set();
+    let favoriteSet = new Set();
+
+    // DOM References
+    const startScreen = document.getElementById('start-screen');
+    const startBtn = document.getElementById('start-btn');
+    const loadProgress = document.getElementById('load-progress');
+    const progressFill = document.getElementById('progress-fill');
+    const progressText = document.getElementById('progress-text');
+    const startCanvas = document.getElementById('start-canvas');
+    
+    const appEl = document.getElementById('app');
+    const gridEl = document.getElementById('sound-grid');
+    const searchInput = document.getElementById('search-input');
+    const statsText = document.getElementById('app-stats');
+    const shuffleBtn = document.getElementById('shuffle-btn');
+    
+    const progressTextEl = document.getElementById('explore-progress-text');
+    const progressFillEl = document.getElementById('progress-track-fill');
+    const medalIconEl = document.getElementById('explore-medal-icon');
+    
+    const catTabs = document.getElementById('cat-tabs');
+    const subcatTabs = document.getElementById('subcat-tabs');
+    
+    // Bottom Sheet DOM
+    const discoveryPanel = document.getElementById('discovery-panel');
+    const panelEmoji = document.getElementById('panel-emoji');
+    const panelName = document.getElementById('panel-name');
+    const panelNameEn = document.getElementById('panel-name-en');
+    const panelFact = document.getElementById('panel-fact');
+    const panelReplayBtn = document.getElementById('panel-replay-btn');
+    const panelCloseBtn = document.getElementById('panel-close-btn');
+    const panelTags = document.getElementById('panel-tags');
+    const panelAuthor = document.getElementById('panel-author');
+    
+    // Volume Control DOM
+    const volumeIcon = document.getElementById('volume-icon');
+    const volumeSlider = document.getElementById('volume-slider');
+
+    // ===== CANVAS PARTICLE SYSTEM =====
+    function initCanvasBackground() {
+      const ctx = startCanvas.getContext('2d');
+      let width = startCanvas.width = window.innerWidth;
+      let height = startCanvas.height = window.innerHeight;
+
+      const particles = [];
+      const emojis = ['🐾', '🐱', '🐦', '🐬', '🐝', '🦁', '🐸', '🌧️', '⚡', '🚗', '🚂', '🔔', '🎵'];
+      
+      class Particle {
+        constructor() {
+          this.x = Math.random() * width;
+          this.y = height + Math.random() * 100;
+          this.size = Math.random() * 18 + 14;
+          this.emoji = emojis[Math.floor(Math.random() * emojis.length)];
+          this.speedY = -(Math.random() * 1.5 + 0.5);
+          this.speedX = Math.random() * 0.8 - 0.4;
+          this.rotation = Math.random() * 360;
+          this.rotationSpeed = Math.random() * 1 - 0.5;
+          this.opacity = Math.random() * 0.2 + 0.15;
+        }
+        update() {
+          this.y += this.speedY;
+          this.x += this.speedX;
+          this.rotation += this.rotationSpeed;
+          if (this.y < -50) {
+            this.y = height + 50;
+            this.x = Math.random() * width;
+          }
+        }
+        draw() {
+          ctx.save();
+          ctx.globalAlpha = this.opacity;
+          ctx.translate(this.x, this.y);
+          ctx.rotate((this.rotation * Math.PI) / 180);
+          ctx.font = `${this.size}px Noto Sans SC`;
+          ctx.fillText(this.emoji, -this.size / 2, this.size / 2);
+          ctx.restore();
+        }
+      }
+
+      for (let i = 0; i < 20; i++) {
+        particles.push(new Particle());
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        particles.forEach(p => {
+          p.update();
+          p.draw();
+        });
+        requestAnimationFrame(animate);
+      }
+      
+      window.addEventListener('resize', () => {
+        width = startCanvas.width = window.innerWidth;
+        height = startCanvas.height = window.innerHeight;
+      });
+
+      animate();
+    }
+
+    initCanvasBackground();
+
+    // ===== PROGRESS SYSTEM =====
+    function loadSavedProgress() {
+      try {
+        const savedPlayed = localStorage.getItem('sound_played');
+        if (savedPlayed) playedSet = new Set(JSON.parse(savedPlayed));
+
+        const savedFavs = localStorage.getItem('sound_favs');
+        if (savedFavs) favoriteSet = new Set(JSON.parse(savedFavs));
+      } catch (e) {
+        console.warn('Unable to load progress from localStorage', e);
+      }
+    }
+
+    // Save Progress Helper
+    function saveProgress() {
+      try {
+        localStorage.setItem('sound_played', JSON.stringify(Array.from(playedSet)));
+        localStorage.setItem('sound_favs', JSON.stringify(Array.from(favoriteSet)));
+      } catch (e) {
+        console.warn('Unable to save progress to localStorage', e);
+      }
+    }
+
+    function updateProgressUI() {
+      if (!manifest) return;
+      const total = manifest.total_sounds || 1;
+      const played = playedSet.size;
+      const pct = Math.round((played / total) * 100);
+      
+      progressTextEl.textContent = `探索进度: ${played}/${total} (${pct}%)`;
+      progressFillEl.style.width = `${pct}%`;
+
+      // Level logic
+      let medal = '🎖️ 声音见习生';
+      if (pct >= 100) medal = '👑 声音大冒险家';
+      else if (pct >= 75) medal = '🏆 声音大师';
+      else if (pct >= 45) medal = '🌟 资深学者';
+      else if (pct >= 20) medal = '🎖️ 探险队长';
+      
+      medalIconEl.textContent = medal;
+    }
+
+    // ===== START UP EVENTS =====
+    startBtn.addEventListener('click', async () => {
+      startBtn.style.display = 'none';
+      loadProgress.style.display = 'flex';
+      progressText.textContent = '正在获取大百科全书...';
+      progressFill.style.width = '20%';
+
+      try {
+        const res = await fetch('data/manifest.json');
+        progressFill.style.width = '70%';
+        manifest = await res.json();
+        progressFill.style.width = '100%';
+        progressText.textContent = '探索之门已开启！';
+      } catch (e) {
+        progressText.textContent = '数据装填失败，请检查网络后刷新重试哦';
+        progressFill.style.background = '#e53935';
+        return;
+      }
+
+      loadSavedProgress();
+      setTimeout(enterMainApp, 600);
+    });
+
+    function enterMainApp() {
+      startScreen.classList.add('hide');
+      setTimeout(() => {
+        startScreen.style.display = 'none';
+        appEl.classList.add('show');
+        
+        // Initial setup
+        renderMainCategories();
+        updateProgressUI();
+        renderSoundsList();
+      }, 700);
+    }
+
+    // ===== CATEGORY RENDER ENGINE =====
+    function renderMainCategories() {
+      if (!manifest) return;
+      
+      // We only list main categories that actually contain sounds
+      const validMainCats = [{ id: 'all', name_zh: '全部', emoji: '🌈' }];
+      const validSubCatsMap = {};
+
+      manifest.categories.forEach(category => {
+        // Check if there are any sounds under this main category
+        const soundCount = manifest.sounds.filter(s => s.category === category.id).length;
+        if (soundCount > 0) {
+          validMainCats.push(category);
+          
+          // Index its subcategories
+          const subMap = {};
+          category.subcategories.forEach(sub => {
+            // Check if there are sounds in this subcategory
+            const subSoundCount = manifest.sounds.filter(s => s.category === category.id && s.subcategory === sub.id).length;
+            if (subSoundCount > 0) {
+              subMap[sub.id] = sub;
+            }
+          });
+          validSubCatsMap[category.id] = Object.values(subMap);
+        }
+      });
+
+      // Render main category elements
+      catTabs.innerHTML = validMainCats.map(c => `
+        <button class="cat-tab ${c.id === currentMainCat ? 'active' : ''}" data-id="${c.id}" role="tab" aria-selected="${c.id === currentMainCat ? 'true' : 'false'}">
+          <span>${c.emoji}</span> ${c.name_zh}
+        </button>
+      `).join('');
+
+      // Add click events
+      catTabs.querySelectorAll('.cat-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          catTabs.querySelectorAll('.cat-tab').forEach(t => {
+            t.classList.remove('active');
+            t.setAttribute('aria-selected', 'false');
+          });
+          tab.classList.add('active');
+          tab.setAttribute('aria-selected', 'true');
+          
+          currentMainCat = tab.dataset.id;
+          currentSubCat = 'all'; // reset sub category
+          
+          // Switch theme colors
+          document.body.className = `cat-${currentMainCat}`;
+          
+          renderSubCategories(validSubCatsMap[currentMainCat]);
+          renderSoundsList();
+        });
+      });
+
+      // Render default subcategories
+      renderSubCategories(validSubCatsMap[currentMainCat]);
+      
+      // Update header statistics
+      statsText.textContent = `精选收录 ${manifest.total_sounds} 种奇妙声音 · ${manifest.total_audio_files} 段真实音轨`;
+    }
+
+    function renderSubCategories(subs) {
+      // Clear subcategories if "all" or category has no valid subcategories
+      if (!subs || subs.length === 0) {
+        subcatTabs.innerHTML = '';
+        subcatTabs.style.display = 'none';
+        return;
+      }
+
+      subcatTabs.style.display = 'flex';
+      
+      // Include the "all" option for subcategories
+      const sublist = [{ id: 'all', name_zh: '全部' }, ...subs];
+      
+      subcatTabs.innerHTML = sublist.map(s => `
+        <button class="subcat-tab ${s.id === currentSubCat ? 'active' : ''}" data-id="${s.id}">
+          ${s.emoji ? s.emoji + ' ' : ''}${s.name_zh}
+        </button>
+      `).join('');
+
+      // Add click handlers
+      subcatTabs.querySelectorAll('.subcat-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          subcatTabs.querySelectorAll('.subcat-tab').forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          currentSubCat = tab.dataset.id;
+          renderSoundsList();
+        });
+      });
+    }
+
+    // ===== MAIN SOUND LIST DISPLAY =====
+    function renderSoundsList() {
+      if (!manifest) return;
+
+      // Filter list
+      let filtered = manifest.sounds;
+
+      // 1. Filter by search query
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase().trim();
+        filtered = filtered.filter(item => {
+          const nameZh = (item.name_zh || '').toLowerCase();
+          const nameEn = (item.name_en || '').toLowerCase();
+          const desc = (item.description || '').toLowerCase();
+          const tags = (item.tags || []).map(t => t.toLowerCase());
+          
+          return nameZh.includes(query) || 
+                 nameEn.includes(query) || 
+                 desc.includes(query) || 
+                 tags.some(tag => tag.includes(query));
+        });
+      }
+
+      // 2. Filter by Main Category / Favorites
+      if (currentMainCat === 'favorites') {
+        filtered = filtered.filter(item => favoriteSet.has(item.id));
+      } else if (currentMainCat !== 'all') {
+        filtered = filtered.filter(item => item.category === currentMainCat);
+      }
+
+      // 3. Filter by Subcategory
+      if (currentMainCat !== 'all' && currentSubCat !== 'all') {
+        filtered = filtered.filter(item => item.subcategory === currentSubCat);
+      }
+
+      // Render Grid Content
+      if (filtered.length === 0) {
+        gridEl.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-emoji">🔍</div>
+            <h3 class="empty-title">没有找到相关的声音哦</h3>
+            <p class="empty-desc">换个词语或者去其他分类看看吧！</p>
+          </div>
+        `;
+        return;
+      }
+
+      gridEl.innerHTML = filtered.map(item => {
+        const isPlayed = playedSet.has(item.id);
+        const isFav = favoriteSet.has(item.id);
+        const currentActiveFile = activeCard && activeCard.dataset.id === item.id;
+        
+        return `
+          <div class="sound-card ${isPlayed ? 'played' : ''} ${currentActiveFile ? 'playing' : ''}" 
+               data-id="${item.id}" 
+               data-data='${JSON.stringify(item).replace(/'/g, "&apos;")}'
+               role="button"
+               aria-label="${item.name_zh}">
+            
+            <button class="card-fav-btn" data-id="${item.id}" aria-label="收藏">
+              ${isFav ? '❤️' : '🤍'}
+            </button>
+            <span class="card-emoji">${item.emoji}</span>
+            <div class="card-name">${item.name_zh}</div>
+            <div class="card-name-en">${item.name_en}</div>
+            
+            <div class="card-wave">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Bind Event Listeners
+      gridEl.querySelectorAll('.sound-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+          // If clicked the favorite button directly, handle toggle
+          if (e.target.closest('.card-fav-btn')) {
+            e.stopPropagation();
+            toggleFavorite(e.target.closest('.card-fav-btn').dataset.id);
+            return;
+          }
+          
+          triggerSoundExploration(card);
+        });
+      });
+    }
+
+    // ===== SEARCH INPUT CONTROLLERS =====
+    let searchDebounceTimeout = null;
+    searchInput.addEventListener('input', (e) => {
+      clearTimeout(searchDebounceTimeout);
+      searchDebounceTimeout = setTimeout(() => {
+        searchQuery = e.target.value;
+        renderSoundsList();
+      }, 250);
+    });
+
+    // ===== FAVORITE TOGGLE =====
+    function toggleFavorite(id) {
+      if (favoriteSet.has(id)) {
+        favoriteSet.delete(id);
+        showToast('已取消收藏');
+      } else {
+        favoriteSet.add(id);
+        showToast('已加入我的收藏');
+      }
+      saveProgress();
+      
+      // Update rendering in case we are in the favorites tab or need to change heart icon
+      renderSoundsList();
+    }
+
+    // ===== PLAY & DISCOVER LOGIC =====
+    function getAudioElement(file) {
+      if (audioCache[file]) {
+        return audioCache[file];
+      }
+      const audio = new Audio(file);
+      audio.preload = 'auto';
+      audio.volume = volume;
+      audioCache[file] = audio;
+      return audio;
+    }
+
+    function triggerSoundExploration(card) {
+      const data = JSON.parse(card.dataset.data);
+      if (!data.sounds || data.sounds.length === 0) return;
+
+      // Select random track if multiple tracks exist
+      const track = data.sounds[Math.floor(Math.random() * data.sounds.length)];
+      
+      // Pause any active track
+      if (activeAudio) {
+        activeAudio.pause();
+        activeAudio.currentTime = 0;
+      }
+
+      // Visual feedback reset
+      if (activeCard) {
+        activeCard.classList.remove('playing');
+      }
+
+      // Update pointers
+      activeCard = card;
+      card.classList.add('playing');
+      card.classList.add('played');
+      
+      // Mark as explored
+      if (!playedSet.has(data.id)) {
+        playedSet.add(data.id);
+        saveProgress();
+        updateProgressUI();
+      }
+
+      // Splash visual stars
+      spawnStarParticles(card, data.emoji);
+
+      // Play Sound
+      const audio = getAudioElement(track.file);
+      audio.volume = volume;
+      audio.currentTime = 0;
+      activeAudio = audio;
+
+      audio.play().catch(e => {
+        console.warn('Audio play auto-blocked by browser policies', e);
+        showToast('点击页面任意区域激活音频播放');
+      });
+
+      // Update Bottom Discovery Panel
+      openDiscoveryPanel(data);
+
+      audio.onended = () => {
+        card.classList.remove('playing');
+        if (activeCard === card) {
+          activeCard = null;
+          activeAudio = null;
+        }
+      };
+    }
+
+    // Particle Burst Animation
+    function spawnStarParticles(card, emoji) {
+      const rect = card.getBoundingClientRect();
+      const cardX = rect.left + rect.width / 2;
+      const cardY = rect.top + rect.height / 2;
+      
+      const particleEmojis = ['✨', '🌟', '⭐', emoji];
+      
+      for (let i = 0; i < 8; i++) {
+        const particle = document.createElement('span');
+        particle.className = 'star-particle';
+        particle.textContent = particleEmojis[Math.floor(Math.random() * particleEmojis.length)];
+        
+        // Random angle and speed
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 50 + Math.random() * 60;
+        const x = Math.cos(angle) * distance;
+        const y = Math.sin(angle) * distance;
+        
+        particle.style.setProperty('--x', `${x}px`);
+        particle.style.setProperty('--y', `${y}px`);
+        particle.style.left = `${cardX}px`;
+        particle.style.top = `${cardY}px`;
+        particle.style.position = 'fixed';
+        
+        document.body.appendChild(particle);
+        setTimeout(() => particle.remove(), 800);
+      }
+    }
+
+    // ===== BOTTOM SHEET CONTROLLER =====
+    function openDiscoveryPanel(data) {
+      panelEmoji.textContent = data.emoji || '🐾';
+      panelName.textContent = data.name_zh || '未知';
+      panelNameEn.textContent = data.name_en || 'Unknown';
+      panelFact.textContent = data.fun_fact || '它是神奇世界里的一员，有着独特而好听的声音！';
+      panelAuthor.textContent = `贡献者: ${data.contributor || '声音大百科'}`;
+      
+      // Tags
+      panelTags.innerHTML = (data.tags || ['百科', '真实声音']).map(tag => `
+        <span class="panel-tag">${tag}</span>
+      `).join('');
+      
+      // Set playing file data for replay button
+      panelReplayBtn.dataset.sounds = JSON.stringify(data.sounds);
+      panelReplayBtn.dataset.id = data.id;
+
+      discoveryPanel.classList.add('show');
+    }
+
+    panelCloseBtn.addEventListener('click', () => {
+      discoveryPanel.classList.remove('show');
+    });
+
+    panelReplayBtn.addEventListener('click', () => {
+      const sounds = JSON.parse(panelReplayBtn.dataset.sounds);
+      const id = panelReplayBtn.dataset.id;
+      
+      // Find matches card
+      const targetCard = Array.from(gridEl.querySelectorAll('.sound-card'))
+                              .find(c => c.dataset.id === id);
+      
+      if (targetCard) {
+        triggerSoundExploration(targetCard);
+      }
+    });
+
+    // Shuffle exploration controller
+    shuffleBtn.addEventListener('click', () => {
+      if (!manifest || manifest.sounds.length === 0) return;
+      
+      // Find cards currently loaded in the UI
+      const cards = gridEl.querySelectorAll('.sound-card');
+      if (cards.length > 0) {
+        const randomCard = cards[Math.floor(Math.random() * cards.length)];
+        randomCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Wait minor delay for smooth scrolling context
+        setTimeout(() => {
+          triggerSoundExploration(randomCard);
+        }, 300);
+      }
+    });
+
+    // ===== AUDIO CONTROLS (VOLUME) =====
+    volumeSlider.addEventListener('input', (e) => {
+      volume = parseFloat(e.target.value);
+      
+      // Apply volume to active track
+      if (activeAudio) {
+        activeAudio.volume = volume;
+      }
+      
+      // Update slider icon
+      if (volume === 0) volumeIcon.textContent = '🔇';
+      else if (volume < 0.3) volumeIcon.textContent = '🔈';
+      else if (volume < 0.7) volumeIcon.textContent = '🔉';
+      else volumeIcon.textContent = '🔊';
+    });
+
+    volumeIcon.addEventListener('click', () => {
+      if (volume > 0) {
+        volumeSlider.dataset.prevVolume = volume;
+        volume = 0;
+      } else {
+        volume = parseFloat(volumeSlider.dataset.prevVolume || 0.6);
+      }
+      volumeSlider.value = volume;
+      volumeSlider.dispatchEvent(new Event('input'));
+    });
+
+    // ===== TOAST UTILITY =====
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    // Add extra listener to add favorites capability
+    // If the tab of main categories changes to a customized layout we can add the favorites button
+    // Let's inject a "💖 我的收藏" main category as well!
+    // We can do this dynamically during manifest load
+    // Update renderMainCategories to support a customized Favorites main category at the end of the tabs if there are items!
+    function addFavoritesCategory() {
+      // Add custom favorite tab dynamically
+      const favoritesTab = document.createElement('button');
+      favoritesTab.className = `cat-tab ${currentMainCat === 'favorites' ? 'active' : ''}`;
+      favoritesTab.dataset.id = 'favorites';
+      favoritesTab.innerHTML = '<span>💖</span> 我的收藏';
+      favoritesTab.role = 'tab';
+      
+      favoritesTab.addEventListener('click', () => {
+        catTabs.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+        favoritesTab.classList.add('active');
+        currentMainCat = 'favorites';
+        currentSubCat = 'all';
+        document.body.className = 'cat-life'; // default fallback colors
+        
+        renderSubCategories([]); // Favorites has no subcategories
+        renderSoundsList();
+      });
+      
+      catTabs.appendChild(favoritesTab);
+    }
+    
+    // Inject custom favorites tab on categories render completion
+    const originalRenderMainCategories = renderMainCategories;
+    renderMainCategories = function() {
+      originalRenderMainCategories();
+      addFavoritesCategory();
+    };
+
+    // Register PWA service worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(e => {
+        console.warn('PWA Service Worker registration skipped', e);
+      });
+    }
+  </script>
 </body>
 </html>
