@@ -6,13 +6,35 @@
   "name_en": "Snake",
   "emoji": "🐍",
   "description": "没有脚的长家伙，嘶嘶叫",
-  "fun_fact": "蛇没有脚但爬得很快，靠肚子的鳞片抓住地面就能往前滑",
+  "fun_fact": "蛇是滑溜溜的爬行动物，虽然没有脚，但它可以用身体像波浪一样移动，悄无声息地滑行哦！它们还喜欢嘶嘶地叫，像在说悄悄话呢！",
   "sounds": [
-    { "file": "audio/real_snake1.mp3" }
+    {
+      "file": "audio/real_snake1.mp3"
+    }
   ],
-  "tags": ["爬行类", "滑溜溜", "蛇"],
+  "tags": [
+    "爬行类",
+    "滑溜溜",
+    "蛇"
+  ],
   "license": "CC0-1.0",
   "source": "https://freesound.org/",
   "contributor": "wbyan2021",
-  "added_at": "2026-06-17"
+  "added_at": "2026-06-17",
+  "fun_fact_ai_generated": true,
+  "ai": {
+    "generated_at": "2026-06-29T16:59:26.980Z",
+    "model": "abab6.5s-chat",
+    "prompt_version": "v1",
+    "text_hash": "sha256:94836dd"
+  },
+  "tts": {
+    "name_zh": "generated/name-zh.mp3",
+    "voice_id_zh": "female-tianmei",
+    "voice_id_en": "male-qn-qingse",
+    "generated_at": "2026-06-30T07:21:56.939Z",
+    "tts_model": "speech-2.8-hd",
+    "name_en": "generated/name-en.mp3",
+    "fun_fact": "generated/fun-fact.mp3"
+  }
 }

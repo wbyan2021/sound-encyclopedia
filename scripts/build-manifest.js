@@ -137,6 +137,17 @@ function main() {
       totalAudioFiles += meta.sounds.length;
     }
 
+    // 同样重映射 tts.* 路径，使其也相对于仓库根目录
+    if (meta.tts) {
+      const ttsFields = ['name_zh', 'name_en', 'fun_fact'];
+      for (const field of ttsFields) {
+        if (meta.tts[field] && typeof meta.tts[field] === 'string' && !meta.tts[field].startsWith('data/')) {
+          meta.tts[field] = path.posix.join(metaDir, meta.tts[field]);
+          totalAudioFiles++;
+        }
+      }
+    }
+
     sounds.push(meta);
   }
 

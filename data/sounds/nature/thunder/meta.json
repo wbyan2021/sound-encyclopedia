@@ -6,7 +6,7 @@
   "name_en": "Thunder",
   "emoji": "🌩️",
   "description": "打雷轰隆隆，闪电亮晶晶",
-  "fun_fact": "雷声是闪电把空气加热膨胀发出的巨响，就像气球爆掉一样",
+  "fun_fact": "轰隆隆，打雷了！当天空中的云朵们吵架时，就会发出响亮的雷声，闪电像天空中的银线，一闪一闪亮晶晶！",
   "sounds": [
     {
       "file": "audio/thunder_1.mp3"
@@ -20,5 +20,21 @@
   "license": "CC0-1.0",
   "source": "https://freesound.org/people/deleted_user_7146007/sounds/383343/",
   "contributor": "wbyan2021",
-  "added_at": "2026-06-26"
+  "added_at": "2026-06-26",
+  "fun_fact_ai_generated": true,
+  "ai": {
+    "generated_at": "2026-06-29T16:59:56.495Z",
+    "model": "abab6.5s-chat",
+    "prompt_version": "v1",
+    "text_hash": "sha256:3e6c5b01"
+  },
+  "tts": {
+    "name_zh": "generated/name-zh.mp3",
+    "name_en": "generated/name-en.mp3",
+    "fun_fact": "generated/fun-fact.mp3",
+    "voice_id_zh": "female-tianmei",
+    "voice_id_en": "male-qn-qingse",
+    "generated_at": "2026-06-30T07:18:41.340Z",
+    "tts_model": "speech-2.8-hd"
+  }
 }

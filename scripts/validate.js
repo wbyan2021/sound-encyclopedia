@@ -135,7 +135,7 @@ function main() {
     }
 
     // ---------- 规则 1: 必填字段校验 ----------
-    const requiredFields = ['id', 'category', 'name_zh', 'name_en', 'emoji', 'sounds', 'license', 'source', 'contributor'];
+    const requiredFields = ['id', 'category', 'name_zh', 'name_en', 'emoji', 'sounds', 'license', 'source', 'contributor', 'added_at'];
     let hasMissingField = false;
     for (const field of requiredFields) {
       if (meta[field] === undefined || meta[field] === null || meta[field] === '') {
@@ -150,9 +150,9 @@ function main() {
     if (typeof meta.id !== 'string' || !meta.id.includes('.')) {
       addFail(`${metaRel}: id 格式无效 "${meta.id}"，应为 {category}.{name}`);
     } else {
-      const [catPart, namePart] = meta.id.split('.');
-      if (!catPart || !namePart) {
-        addFail(`${metaRel}: id 格式无效 "${meta.id}"，应为 {category}.{name}`);
+      const parts = meta.id.split('.');
+      if (parts.length !== 2 || !parts[0] || !parts[1]) {
+        addFail(`${metaRel}: id 格式无效 "${meta.id}"，应为恰好 {category}.{name} 两段`);
       }
     }
 
@@ -216,6 +216,39 @@ function main() {
         }
       } catch (err) {
         addWarn(`${metaRel}: 无法获取音频文件大小 "${audioRel}": ${err.message}`);
+      }
+    }
+
+    // ---------- 规则 9: TTS 字段校验（可选字段，存在则检查） ----------
+    if (meta.tts) {
+      const ttsFields = ['name_zh', 'name_en', 'fun_fact'];
+      for (const field of ttsFields) {
+        if (meta.tts[field]) {
+          let ttsPath;
+          // 兼容两种路径格式：相对 meta 目录的路径 或 以 data/ 开头的仓库根相对路径
+          if (meta.tts[field].startsWith('data/')) {
+            ttsPath = path.join(ROOT, meta.tts[field]);
+          } else {
+            ttsPath = path.join(metaDir, meta.tts[field]);
+          }
+          const ttsRel = path.relative(ROOT, ttsPath);
+          if (!fs.existsSync(ttsPath)) {
+            addFail(`${metaRel}: tts.${field} 引用的文件不存在 "${ttsRel}"`);
+          } else {
+            const ext = path.extname(meta.tts[field]).toLowerCase();
+            if (ext !== '.wav' && ext !== '.mp3') {
+              addWarn(`${metaRel}: tts.${field} 文件格式 "${ext}" 不是 .wav 或 .mp3`);
+            }
+          }
+        }
+      }
+    }
+
+    // ---------- 规则 10: fun_fact 长度建议 ----------
+    if (meta.fun_fact && typeof meta.fun_fact === 'string') {
+      const len = meta.fun_fact.length;
+      if (len < 20 || len > 80) {
+        addWarn(`${metaRel}: fun_fact 长度 ${len} 字，建议 30-50 字`);
       }
     }
   }

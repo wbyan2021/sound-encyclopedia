@@ -1,5 +1,5 @@
-// Service Worker - 声音大百科 v2.1
-const CACHE_NAME = 'sound-encyclopedia-v2.1';
+// Service Worker - 声音大百科 v2.3
+const CACHE_NAME = 'sound-encyclopedia-v2.3';
 
 self.addEventListener('install', e => {
   self.skipWaiting();
@@ -50,7 +50,7 @@ self.addEventListener('fetch', e => {
   }
 
   // 音频文件: cache-first (省流量，加载过就缓存)
-  if (url.pathname.endsWith('.mp3')) {
+  if (url.pathname.endsWith('.mp3') || url.pathname.endsWith('.wav')) {
     e.respondWith(
       caches.match(e.request).then(cached => {
         if (cached) return cached;

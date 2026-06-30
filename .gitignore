@@ -10,6 +10,11 @@ node_modules/
 *.swp
 *.swo
 
+# 环境变量（含 API Key，绝对不能入库）
+.env
+.env.bak*
+.env.*.bak
+
 # 临时文件
 *.log
 *.tmp

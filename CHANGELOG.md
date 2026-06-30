@@ -4,6 +4,32 @@
 
 ---
 
+## [2.3.0] - 2026-06-29
+
+### 新增
+- **AI 科普文案生成**：集成 MiniMax / DeepSeek LLM，一键为声音生成儿童友好的趣味科普文案
+- **AI 语音朗读 (TTS)**：
+  - 支持 Speech-2.8-HD 高清语音模型，音质更自然
+  - 支持自定义中文/英文音色 ID
+  - 自动生成名称朗读（中文/英文）和科普全文朗读
+- **本地管理后台**：Node.js + Web UI，提供 API Key 配置、AI 生成、数据统计功能
+- **TTS 朗读按钮**：详情面板中新增 🔊 中文/英文/科普三个朗读按钮
+- **4 大分类 58 种声音**：动物、乐器、自然、交通全品类覆盖
+
+### 优化
+- **音频路径系统**：build-manifest.js 自动重映射 TTS 音频路径，前端无需手动拼接
+- **配置灵活性**：支持自定义 API Base URL，适配不同服务商的 API 端点
+- **离线缓存策略**：新增 TTS 音频的 Service Worker 缓存支持
+
+### 技术
+- 新增 `scripts/lib/minimax.js`：MiniMax/DeepSeek API 封装库
+- 新增 `scripts/ai-generate-funfact.js`：批量生成科普文案脚本
+- 新增 `scripts/ai-generate-tts.js`：批量生成 TTS 朗读脚本
+- 新增 `scripts/admin-server.js`：本地管理后台服务器
+- `meta.json` 新增 `tts` 字段，记录朗读音频路径、音色 ID 和生成时间
+
+---
+
 ## [2.2.0] - 2026-06-25
 
 ### 新增

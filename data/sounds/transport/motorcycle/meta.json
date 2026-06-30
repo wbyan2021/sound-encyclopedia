@@ -6,7 +6,7 @@
   "name_en": "Motorcycle",
   "emoji": "🏍️",
   "description": "摩托车突突突的声音",
-  "fun_fact": "摩托车的发动机比汽车的跑得快，所以声音更响更高",
+  "fun_fact": "摩托车突突突的声音，就像个小马达在跑，每辆都有独特的“嘟嘟”声，是路上的小伙伴哦！",
   "sounds": [
     {
       "file": "audio/motorcycle_1.mp3"
@@ -20,5 +20,21 @@
   "license": "CC0-1.0",
   "source": "https://freesound.org/people/eldiariosonoro_/sounds/543725/",
   "contributor": "wbyan2021",
-  "added_at": "2026-06-26"
+  "added_at": "2026-06-26",
+  "fun_fact_ai_generated": true,
+  "ai": {
+    "generated_at": "2026-06-29T17:00:06.169Z",
+    "model": "abab6.5s-chat",
+    "prompt_version": "v1",
+    "text_hash": "sha256:59cc9819"
+  },
+  "tts": {
+    "name_zh": "generated/name-zh.mp3",
+    "voice_id_zh": "female-tianmei",
+    "voice_id_en": "male-qn-qingse",
+    "generated_at": "2026-06-30T07:22:59.223Z",
+    "tts_model": "speech-2.8-hd",
+    "name_en": "generated/name-en.mp3",
+    "fun_fact": "generated/fun-fact.mp3"
+  }
 }

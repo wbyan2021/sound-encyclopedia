@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#FF9800">
   <title>声音大百科 - 沉浸式儿童声音探索与科普平台</title>
   <meta name="description" content="声音大百科收集真实的动物、自然、交通和生活声音，专为1-6岁儿童设计。真实的自然声音，极简的交互，配有妙趣横生的儿童科普，开启宝宝的探索世界之旅。">
@@ -77,6 +77,12 @@
       -webkit-user-select: none;
       user-select: none;
       scroll-behavior: smooth;
+    }
+
+    /* 允许在科普面板和搜索框中选择文本 */
+    .panel-fact, .panel-name, .panel-name-en, .search-bar, input {
+      -webkit-user-select: text;
+      user-select: text;
     }
 
     body {
@@ -270,6 +276,21 @@
     .logo-area {
       display: flex;
       flex-direction: column;
+      cursor: pointer;
+      user-select: none;
+      padding: 0.2rem 0.4rem;
+      margin-left: -0.4rem;
+      border-radius: 8px;
+      transition: background 0.15s ease;
+    }
+
+    .logo-area:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .logo-area:focus-visible {
+      outline: 2px solid var(--accent-color, #4a90e2);
+      outline-offset: 2px;
     }
 
     .app-title {
@@ -815,6 +836,45 @@
       border-radius: 20px;
     }
 
+    /* ===== TTS AUDIO BUTTONS ===== */
+    .panel-tts-row {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tts-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .tts-btn:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .tts-btn.playing {
+      background: var(--primary);
+      color: #fff;
+      animation: pulseGrow 0.6s ease-in-out infinite alternate;
+    }
+
+    .tts-btn .tts-ai-badge {
+      font-size: 0.6rem;
+      opacity: 0.8;
+    }
+
     /* ===== FLOATING ACTION CONTROLS ===== */
     .controls-group {
       position: fixed;
@@ -964,7 +1024,7 @@
     <!-- Header -->
     <header class="app-header">
       <div class="header-content">
-        <div class="logo-area">
+        <div class="logo-area" id="logo-area" role="button" tabindex="0" title="点击进入管理后台">
           <h1 class="app-title">🐾 声音大百科</h1>
           <span class="app-subtitle" id="app-stats">数据读取中...</span>
         </div>
@@ -1035,6 +1095,19 @@
       
       <div class="panel-content">
         <div class="panel-label">💡 宝宝科普小卡片</div>
+        
+        <div class="panel-tts-row" id="panel-tts-row">
+          <button class="tts-btn" id="tts-btn-zh" data-type="name_zh" title="🤖 AI 朗读中文名">
+            🔊 中文名 <span class="tts-ai-badge">🤖</span>
+          </button>
+          <button class="tts-btn" id="tts-btn-en" data-type="name_en" title="🤖 AI 朗读英文名">
+            🔊 英文名 <span class="tts-ai-badge">🤖</span>
+          </button>
+          <button class="tts-btn" id="tts-btn-fact" data-type="fun_fact" title="🤖 AI 朗读科普">
+            🤖 AI讲解
+          </button>
+        </div>
+        
         <p class="panel-fact" id="panel-fact">正在准备科普知识...</p>
       </div>
       
@@ -1067,11 +1140,21 @@
     let activeAudio = null;
     let activeCard = null;
     let audioCache = {};
+    const AUDIO_CACHE_MAX = 30;     // 限制缓存数量，防止内存泄漏
     let volume = 0.6;
-    
+    let activeTTS = null;
+    let currentTTSData = null;
+    let canvasAnimating = false;    // 控制 Canvas 动画
+
     // User local progress cache
     let playedSet = new Set();
     let favoriteSet = new Set();
+
+    // ===== XSS 安全工具 =====
+    function esc(str) {
+      if (str == null) return '';
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    }
 
     // DOM References
     const startScreen = document.getElementById('start-screen');
@@ -1086,6 +1169,22 @@
     const searchInput = document.getElementById('search-input');
     const statsText = document.getElementById('app-stats');
     const shuffleBtn = document.getElementById('shuffle-btn');
+    const logoArea = document.getElementById('logo-area');
+
+    // Logo 点击跳转管理后台（admin-server.js 默认端口 3099）
+    const ADMIN_URL = 'http://localhost:3099';
+    const goAdmin = () => {
+      window.open(ADMIN_URL, '_blank', 'noopener,noreferrer');
+    };
+    if (logoArea) {
+      logoArea.addEventListener('click', goAdmin);
+      logoArea.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          goAdmin();
+        }
+      });
+    }
     
     const progressTextEl = document.getElementById('explore-progress-text');
     const progressFillEl = document.getElementById('progress-track-fill');
@@ -1104,6 +1203,12 @@
     const panelCloseBtn = document.getElementById('panel-close-btn');
     const panelTags = document.getElementById('panel-tags');
     const panelAuthor = document.getElementById('panel-author');
+    
+    // TTS Button DOM
+    const ttsBtnZh = document.getElementById('tts-btn-zh');
+    const ttsBtnEn = document.getElementById('tts-btn-en');
+    const ttsBtnFact = document.getElementById('tts-btn-fact');
+    const ttsRow = document.getElementById('panel-tts-row');
     
     // Volume Control DOM
     const volumeIcon = document.getElementById('volume-icon');
@@ -1397,17 +1502,18 @@
         
         return `
           <div class="sound-card ${isPlayed ? 'played' : ''} ${currentActiveFile ? 'playing' : ''}" 
-               data-id="${item.id}" 
-               data-data='${JSON.stringify(item).replace(/'/g, "&apos;")}'
+               data-id="${esc(item.id)}" 
+               data-data='${esc(JSON.stringify(item))}'
                role="button"
-               aria-label="${item.name_zh}">
+               tabindex="0"
+               aria-label="${esc(item.name_zh)}">
             
-            <button class="card-fav-btn" data-id="${item.id}" aria-label="收藏">
+            <button class="card-fav-btn" data-id="${esc(item.id)}" aria-label="收藏" tabindex="-1">
               ${isFav ? '❤️' : '🤍'}
             </button>
-            <span class="card-emoji">${item.emoji}</span>
-            <div class="card-name">${item.name_zh}</div>
-            <div class="card-name-en">${item.name_en}</div>
+            <span class="card-emoji">${esc(item.emoji)}</span>
+            <div class="card-name">${esc(item.name_zh)}</div>
+            <div class="card-name-en">${esc(item.name_en)}</div>
             
             <div class="card-wave">
               <span></span>
@@ -1461,19 +1567,33 @@
 
     // ===== PLAY & DISCOVER LOGIC =====
     function getAudioElement(file) {
-      if (audioCache[file]) {
-        return audioCache[file];
-      }
+      if (audioCache[file]) return audioCache[file];
       const audio = new Audio(file);
       audio.preload = 'auto';
       audio.volume = volume;
       audioCache[file] = audio;
+
+      // 限制缓存大小：超过上限时删除最早的条目
+      const keys = Object.keys(audioCache);
+      if (keys.length > AUDIO_CACHE_MAX) {
+        const oldest = keys[0];
+        delete audioCache[oldest];
+      }
+
       return audio;
     }
 
     function triggerSoundExploration(card) {
-      const data = JSON.parse(card.dataset.data);
-      if (!data.sounds || data.sounds.length === 0) return;
+      let data;
+      try { data = JSON.parse(card.dataset.data); }
+      catch(e) { console.warn('Invalid card data', e); return; }
+      if (!data.sounds || data.sounds.length === 0) {
+        showToast('这个声音还没有音频文件');
+        return;
+      }
+
+      // Stop any playing TTS
+      stopTTS();
 
       // Select random track if multiple tracks exist
       const track = data.sounds[Math.floor(Math.random() * data.sounds.length)];
@@ -1510,8 +1630,17 @@
       audio.currentTime = 0;
       activeAudio = audio;
 
+      // Error handling: 回退 UI 状态
+      audio.onerror = () => {
+        card.classList.remove('playing');
+        if (activeCard === card) { activeCard = null; activeAudio = null; }
+        showToast('音频加载失败，请稍后重试');
+      };
+
       audio.play().catch(e => {
-        console.warn('Audio play auto-blocked by browser policies', e);
+        console.warn('Audio play blocked:', e.message);
+        card.classList.remove('playing');
+        if (activeCard === card) { activeCard = null; activeAudio = null; }
         showToast('点击页面任意区域激活音频播放');
       });
 
@@ -1562,23 +1691,114 @@
       panelEmoji.textContent = data.emoji || '🐾';
       panelName.textContent = data.name_zh || '未知';
       panelNameEn.textContent = data.name_en || 'Unknown';
-      panelFact.textContent = data.fun_fact || '它是神奇世界里的一员，有着独特而好听的声音！';
+      
+      // Show AI badge for AI-generated fun_fact
+      const isAIFact = data.fun_fact_ai_generated;
+      const factText = data.fun_fact || '它是神奇世界里的一员，有着独特而好听的声音！';
+      panelFact.textContent = isAIFact ? `🤖 ${factText}` : factText;
+      
+      // Update panel label with AI indicator
+      const panelLabel = document.querySelector('.panel-label');
+      panelLabel.textContent = isAIFact ? '🤖 AI 科普小卡片' : '💡 宝宝科普小卡片';
+      
       panelAuthor.textContent = `贡献者: ${data.contributor || '声音大百科'}`;
       
       // Tags
       panelTags.innerHTML = (data.tags || ['百科', '真实声音']).map(tag => `
-        <span class="panel-tag">${tag}</span>
+        <span class="panel-tag">${esc(tag)}</span>
       `).join('');
       
       // Set playing file data for replay button
       panelReplayBtn.dataset.sounds = JSON.stringify(data.sounds);
       panelReplayBtn.dataset.id = data.id;
 
+      // TTS buttons: show/hide based on availability
+      currentTTSData = data.tts || null;
+      const hasTTS = currentTTSData && (currentTTSData.name_zh || currentTTSData.name_en || currentTTSData.fun_fact);
+      ttsRow.style.display = hasTTS ? 'flex' : 'none';
+      
+      if (hasTTS) {
+        ttsBtnZh.style.display = currentTTSData.name_zh ? 'inline-flex' : 'none';
+        ttsBtnEn.style.display = currentTTSData.name_en ? 'inline-flex' : 'none';
+        ttsBtnFact.style.display = currentTTSData.fun_fact ? 'inline-flex' : 'none';
+      }
+
       discoveryPanel.classList.add('show');
     }
 
     panelCloseBtn.addEventListener('click', () => {
       discoveryPanel.classList.remove('show');
+      // Stop any playing TTS when panel closes
+      stopTTS();
+    });
+
+    // ===== TTS AUDIO BUTTONS =====
+    
+    function stopTTS() {
+      if (activeTTS) {
+        activeTTS.pause();
+        activeTTS = null;
+      }
+      // Remove playing state from all TTS buttons
+      [ttsBtnZh, ttsBtnEn, ttsBtnFact].forEach(btn => btn.classList.remove('playing'));
+    }
+
+    function playTTS(ttsPath, fieldName) {
+      stopTTS();
+      if (!ttsPath) return;
+
+      // ttsPath 已在 build-manifest 中重映射为仓库根相对路径（data/sounds/.../generated/xxx.wav）
+      // 但如果仍是 meta 目录相对路径（generated/xxx.wav），需要拼接
+      let fullPath;
+      if (ttsPath.startsWith('data/')) {
+        fullPath = ttsPath;
+      } else {
+        const soundId = panelReplayBtn.dataset.id || '';
+        const dotIdx = soundId.indexOf('.');
+        if (dotIdx === -1) return;
+        const category = soundId.slice(0, dotIdx);
+        const name = soundId.slice(dotIdx + 1);
+        fullPath = `data/sounds/${category}/${name}/${ttsPath}`;
+      }
+
+      const audio = new Audio(fullPath);
+      audio.volume = volume;
+      activeTTS = audio;
+
+      audio.addEventListener('play', () => {
+        const btnMap = { name_zh: ttsBtnZh, name_en: ttsBtnEn, fun_fact: ttsBtnFact };
+        const btn = btnMap[fieldName];
+        if (btn) btn.classList.add('playing');
+      });
+
+      audio.addEventListener('ended', () => { stopTTS(); });
+
+      audio.addEventListener('error', () => {
+        stopTTS();
+        showToast('🤖 AI 朗读音频还没准备好，稍后再试试');
+      });
+
+      audio.play().catch(() => {
+        showToast('🤖 AI 朗读音频还没准备好');
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    // TTS button event handlers
+    ttsBtnZh.addEventListener('click', () => {
+      if (currentTTSData?.name_zh) playTTS(currentTTSData.name_zh, 'name_zh');
+    });
+    ttsBtnEn.addEventListener('click', () => {
+      if (currentTTSData?.name_en) playTTS(currentTTSData.name_en, 'name_en');
+    });
+    ttsBtnFact.addEventListener('click', () => {
+      if (currentTTSData?.fun_fact) playTTS(currentTTSData.fun_fact, 'fun_fact');
     });
 
     panelReplayBtn.addEventListener('click', () => {
@@ -1614,12 +1834,11 @@
     // ===== AUDIO CONTROLS (VOLUME) =====
     volumeSlider.addEventListener('input', (e) => {
       volume = parseFloat(e.target.value);
-      
-      // Apply volume to active track
-      if (activeAudio) {
-        activeAudio.volume = volume;
-      }
-      
+
+      // Apply volume to active track and TTS
+      if (activeAudio) activeAudio.volume = volume;
+      if (activeTTS) activeTTS.volume = volume;
+
       // Update slider icon
       if (volume === 0) volumeIcon.textContent = '🔇';
       else if (volume < 0.3) volumeIcon.textContent = '🔈';
@@ -1638,15 +1857,7 @@
       volumeSlider.dispatchEvent(new Event('input'));
     });
 
-    // ===== TOAST UTILITY =====
-    function showToast(msg) {
-      const toast = document.getElementById('toast');
-      toast.textContent = msg;
-      toast.classList.add('show');
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 2500);
-    }
+    // showToast 已在 TTS AUDIO BUTTONS 区域定义，此处不再重复
 
     // Add extra listener to add favorites capability
     // If the tab of main categories changes to a customized layout we can add the favorites button

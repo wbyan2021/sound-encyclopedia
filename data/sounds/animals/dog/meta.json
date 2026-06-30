@@ -6,29 +6,83 @@
   "name_en": "Dog",
   "emoji": "🐶",
   "description": "人类最忠实的朋友，喜欢汪汪叫",
-  "fun_fact": "小狗的鼻子比人厉害一万倍，你藏在口袋里的小饼干它一下就能闻到哦",
+  "fun_fact": "小狗是人类最忠实的朋友，总是爱用“汪汪”和我们打招呼。它们不仅能听懂我们的话，还能用叫声和尾巴表达自己的感受呢！",
   "sounds": [
-    { "file": "audio/dog1a.mp3" },
-    { "file": "audio/dog1b.mp3" },
-    { "file": "audio/dog2a.mp3" },
-    { "file": "audio/dog2b.mp3" },
-    { "file": "audio/dog3a.mp3" },
-    { "file": "audio/dog_barking1.mp3" },
-    { "file": "audio/dog_barking2.mp3" },
-    { "file": "audio/maltese_dog1.mp3" },
-    { "file": "audio/maltese_dog2.mp3" },
-    { "file": "audio/maltese_dog3.mp3" },
-    { "file": "audio/maltese_dog4.mp3" },
-    { "file": "audio/maltese_dog5.mp3" },
-    { "file": "audio/maltese_dog6.mp3" },
-    { "file": "audio/maltese_dog7.mp3" },
-    { "file": "audio/small_dog1.mp3" },
-    { "file": "audio/small_dog2.mp3" },
-    { "file": "audio/talking_dog.mp3" }
+    {
+      "file": "audio/dog1a.mp3"
+    },
+    {
+      "file": "audio/dog1b.mp3"
+    },
+    {
+      "file": "audio/dog2a.mp3"
+    },
+    {
+      "file": "audio/dog2b.mp3"
+    },
+    {
+      "file": "audio/dog3a.mp3"
+    },
+    {
+      "file": "audio/dog_barking1.mp3"
+    },
+    {
+      "file": "audio/dog_barking2.mp3"
+    },
+    {
+      "file": "audio/maltese_dog1.mp3"
+    },
+    {
+      "file": "audio/maltese_dog2.mp3"
+    },
+    {
+      "file": "audio/maltese_dog3.mp3"
+    },
+    {
+      "file": "audio/maltese_dog4.mp3"
+    },
+    {
+      "file": "audio/maltese_dog5.mp3"
+    },
+    {
+      "file": "audio/maltese_dog6.mp3"
+    },
+    {
+      "file": "audio/maltese_dog7.mp3"
+    },
+    {
+      "file": "audio/small_dog1.mp3"
+    },
+    {
+      "file": "audio/small_dog2.mp3"
+    },
+    {
+      "file": "audio/talking_dog.mp3"
+    }
   ],
-  "tags": ["宠物", "汪汪", "小狗"],
+  "tags": [
+    "宠物",
+    "汪汪",
+    "小狗"
+  ],
   "license": "CC0-1.0",
   "source": "https://freesound.org/",
   "contributor": "wbyan2021",
-  "added_at": "2026-06-17"
+  "added_at": "2026-06-17",
+  "fun_fact_ai_generated": true,
+  "ai": {
+    "generated_at": "2026-06-29T16:58:46.526Z",
+    "model": "abab6.5s-chat",
+    "prompt_version": "v1",
+    "text_hash": "sha256:14d051ed"
+  },
+  "tts": {
+    "name_zh": "generated/name-zh.mp3",
+    "name_en": "generated/name-en.mp3",
+    "voice_id_zh": "female-tianmei",
+    "voice_id_en": "male-qn-qingse",
+    "generated_at": "2026-06-30T07:20:13.953Z",
+    "tts_model": "speech-2.8-hd",
+    "fun_fact": "generated/fun-fact.mp3"
+  }
 }

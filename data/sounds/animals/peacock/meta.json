@@ -6,13 +6,35 @@
   "name_en": "Peacock",
   "emoji": "🦚",
   "description": "最美的鸟，会开屏",
-  "fun_fact": "只有公孔雀才会开屏，它展开漂亮的羽毛是为了吸引母孔雀",
+  "fun_fact": "孔雀，一种超美的鸟儿，它开屏的时候就像一面五彩的扇子呢！它生活在森林里，开屏不只是为了好看，还能帮它找到朋友呢。",
   "sounds": [
-    { "file": "audio/real_peacock1.mp3" }
+    {
+      "file": "audio/real_peacock1.mp3"
+    }
   ],
-  "tags": ["鸟类", "美丽", "孔雀"],
+  "tags": [
+    "鸟类",
+    "美丽",
+    "孔雀"
+  ],
   "license": "CC0-1.0",
   "source": "https://freesound.org/",
   "contributor": "wbyan2021",
-  "added_at": "2026-06-17"
+  "added_at": "2026-06-17",
+  "fun_fact_ai_generated": true,
+  "ai": {
+    "generated_at": "2026-06-29T16:59:16.865Z",
+    "model": "abab6.5s-chat",
+    "prompt_version": "v1",
+    "text_hash": "sha256:7ea9f06f"
+  },
+  "tts": {
+    "name_zh": "generated/name-zh.mp3",
+    "voice_id_zh": "female-tianmei",
+    "voice_id_en": "male-qn-qingse",
+    "generated_at": "2026-06-30T07:21:30.438Z",
+    "tts_model": "speech-2.8-hd",
+    "name_en": "generated/name-en.mp3",
+    "fun_fact": "generated/fun-fact.mp3"
+  }
 }

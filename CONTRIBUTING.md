@@ -29,19 +29,21 @@
 
 ```json
 {
+  "id": "animals.whale",
+  "category": "animals",
+  "subcategory": "marine",
   "name_zh": "鲸鱼",
   "name_en": "Whale",
   "emoji": "🐋",
-  "subcategory": "marine",
   "description": "深海中鲸鱼的悠长呼唤",
-  "audio": [
-    {
-      "file": "whale-call.mp3",
-      "description": "鲸鱼长鸣"
-    }
+  "sounds": [
+    { "file": "audio/whale-call.mp3" }
   ],
+  "tags": ["海洋", "哺乳动物", "鲸歌"],
+  "license": "CC0-1.0",
   "source": "https://example.com/whale-sound",
-  "license": "CC0-1.0"
+  "contributor": "你的 GitHub 用户名",
+  "added_at": "2026-06-30"
 }
 ```
 
@@ -49,14 +51,20 @@
 
 | 字段 | 必填 | 说明 |
 |------|------|------|
-| `name_zh` | 是 | 中文名 |
-| `name_en` | 是 | 英文名 |
-| `emoji` | 是 | 代表 Emoji |
+| `id` | 是 | 格式 `{category}.{name_en}`，全局唯一，如 `animals.whale` |
+| `category` | 是 | 主分类 id，对应 categories.json 中的分类（animals/nature/transport/life） |
 | `subcategory` | 是 | 子分类 id（见 categories.json） |
+| `name_zh` | 是 | 中文名 |
+| `name_en` | 是 | 英文名（也是目录名） |
+| `emoji` | 是 | 代表 Emoji |
 | `description` | 否 | 一句话描述 |
-| `audio` | 是 | 音频文件列表，每项含 `file` 和 `description` |
-| `source` | 是 | 音频来源 URL |
+| `sounds` | 是 | 音频文件数组，至少 1 条，`file` 为相对 meta.json 的路径 |
+| `fun_fact` | 否 | 儿童友好科普文案（30-50字），可用 AI 批量生成 |
+| `tags` | 否 | 搜索标签数组，支持中文名、拼音多维检索 |
 | `license` | 是 | 授权协议（CC0-1.0 或可商用协议名称） |
+| `source` | 是 | 音频来源 URL |
+| `contributor` | 是 | GitHub 用户名 |
+| `added_at` | 是 | 添加日期，格式 YYYY-MM-DD |
 
 ---
 

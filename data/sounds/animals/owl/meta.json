@@ -6,13 +6,35 @@
   "name_en": "Owl",
   "emoji": "🦉",
   "description": "夜晚不睡觉的大眼睛，咕咕叫",
-  "fun_fact": "猫头鹰的头能转二百七十度，不用转身就能看到身后的东西哦",
+  "fun_fact": "猫头鹰的眼睛大大的，像两盏明亮的灯，在黑夜中也能看清东西。它们晚上不睡觉，咕咕的叫声在寂静中响起，像是在和月亮打招呼呢。",
   "sounds": [
-    { "file": "audio/owl.mp3" }
+    {
+      "file": "audio/owl.mp3"
+    }
   ],
-  "tags": ["鸟类", "大眼睛", "猫头鹰"],
+  "tags": [
+    "鸟类",
+    "大眼睛",
+    "猫头鹰"
+  ],
   "license": "CC0-1.0",
   "source": "https://freesound.org/",
   "contributor": "wbyan2021",
-  "added_at": "2026-06-17"
+  "added_at": "2026-06-17",
+  "fun_fact_ai_generated": true,
+  "ai": {
+    "generated_at": "2026-06-29T16:59:13.289Z",
+    "model": "abab6.5s-chat",
+    "prompt_version": "v1",
+    "text_hash": "sha256:4b6272b3"
+  },
+  "tts": {
+    "name_zh": "generated/name-zh.mp3",
+    "voice_id_zh": "female-tianmei",
+    "voice_id_en": "male-qn-qingse",
+    "generated_at": "2026-06-30T07:21:21.987Z",
+    "tts_model": "speech-2.8-hd",
+    "name_en": "generated/name-en.mp3",
+    "fun_fact": "generated/fun-fact.mp3"
+  }
 }

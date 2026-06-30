@@ -6,13 +6,35 @@
   "name_en": "Elephant",
   "emoji": "🐘",
   "description": "陆地上最大的动物，鼻子超级长",
-  "fun_fact": "大象的鼻子有四万块肌肉，能捡起一颗小花生，也能推倒大树",
+  "fun_fact": "哇！大象是陆地上最大的动物呢，它们长长的鼻子超级厉害，可以用来喝水、搬东西，还能和小伙伴打招呼呢！",
   "sounds": [
-    { "file": "audio/real_elephant1.mp3" }
+    {
+      "file": "audio/real_elephant1.mp3"
+    }
   ],
-  "tags": ["野生动物", "长鼻子", "大象"],
+  "tags": [
+    "野生动物",
+    "长鼻子",
+    "大象"
+  ],
   "license": "CC0-1.0",
   "source": "https://freesound.org/",
   "contributor": "wbyan2021",
-  "added_at": "2026-06-17"
+  "added_at": "2026-06-17",
+  "fun_fact_ai_generated": true,
+  "ai": {
+    "generated_at": "2026-06-29T16:58:55.252Z",
+    "model": "abab6.5s-chat",
+    "prompt_version": "v1",
+    "text_hash": "sha256:dbb652f"
+  },
+  "tts": {
+    "name_zh": "generated/name-zh.mp3",
+    "voice_id_zh": "female-tianmei",
+    "voice_id_en": "male-qn-qingse",
+    "generated_at": "2026-06-30T07:20:39.059Z",
+    "tts_model": "speech-2.8-hd",
+    "name_en": "generated/name-en.mp3",
+    "fun_fact": "generated/fun-fact.mp3"
+  }
 }

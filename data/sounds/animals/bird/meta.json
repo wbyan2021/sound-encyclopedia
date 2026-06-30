@@ -6,23 +6,65 @@
   "name_en": "Bird",
   "emoji": "🐦",
   "description": "唱好听的歌，在天空中飞翔",
-  "fun_fact": "小鸟的骨头是空心的，所以身体很轻，才能在天上飞起来呀",
+  "fun_fact": "小朋友们，你知道吗？小鸟们不仅能在天空中自由飞翔，还会唱出各种好听的歌哦！它们用这些美妙的旋律吸引同伴，一起快乐地生活。下次听到鸟儿唱歌，不妨仔细聆听一下，它们可能在分享故事呢！",
   "sounds": [
-    { "file": "audio/bulbul.mp3" },
-    { "file": "audio/flycatcher1.mp3" },
-    { "file": "audio/river_bird.mp3" },
-    { "file": "audio/sparrows.mp3" },
-    { "file": "audio/swallows.mp3" },
-    { "file": "audio/tropical_bird1.mp3" },
-    { "file": "audio/tropical_bird2.mp3" },
-    { "file": "audio/tropical_bird3.mp3" },
-    { "file": "audio/warbler1.mp3" },
-    { "file": "audio/warbler2.mp3" },
-    { "file": "audio/warbler3.mp3" }
+    {
+      "file": "audio/bulbul.mp3"
+    },
+    {
+      "file": "audio/flycatcher1.mp3"
+    },
+    {
+      "file": "audio/river_bird.mp3"
+    },
+    {
+      "file": "audio/sparrows.mp3"
+    },
+    {
+      "file": "audio/swallows.mp3"
+    },
+    {
+      "file": "audio/tropical_bird1.mp3"
+    },
+    {
+      "file": "audio/tropical_bird2.mp3"
+    },
+    {
+      "file": "audio/tropical_bird3.mp3"
+    },
+    {
+      "file": "audio/warbler1.mp3"
+    },
+    {
+      "file": "audio/warbler2.mp3"
+    },
+    {
+      "file": "audio/warbler3.mp3"
+    }
   ],
-  "tags": ["小鸟", "鸟类", "唱歌"],
+  "tags": [
+    "小鸟",
+    "鸟类",
+    "唱歌"
+  ],
   "license": "CC0-1.0",
   "source": "https://freesound.org/",
   "contributor": "wbyan2021",
-  "added_at": "2026-06-17"
+  "added_at": "2026-06-17",
+  "fun_fact_ai_generated": true,
+  "ai": {
+    "generated_at": "2026-06-29T16:58:35.236Z",
+    "model": "abab6.5s-chat",
+    "prompt_version": "v1",
+    "text_hash": "sha256:29593c34"
+  },
+  "tts": {
+    "name_zh": "generated/name-zh.mp3",
+    "name_en": "generated/name-en.mp3",
+    "fun_fact": "generated/fun-fact.mp3",
+    "voice_id_zh": "female-tianmei",
+    "voice_id_en": "male-qn-qingse",
+    "generated_at": "2026-06-30T07:15:30.928Z",
+    "tts_model": "speech-2.8-hd"
+  }
 }

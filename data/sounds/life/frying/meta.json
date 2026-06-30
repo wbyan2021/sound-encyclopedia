@@ -6,7 +6,7 @@
   "name_en": "Frying",
   "emoji": "🍳",
   "description": "炒菜滋滋啦啦的声音",
-  "fun_fact": "油在热锅里会跳舞，菜放进去就发出滋滋声，好香呀",
+  "fun_fact": "炒菜时滋滋啦啦的声音，是因为热油和食材接触时产生的水蒸气呀，就像是在和食物玩耍，发出的快乐声音呢！",
   "sounds": [
     {
       "file": "audio/frying_1.mp3"
@@ -20,5 +20,21 @@
   "license": "CC0-1.0",
   "source": "https://freesound.org/people/Whiprealgood/sounds/529567/",
   "contributor": "wbyan2021",
-  "added_at": "2026-06-26"
+  "added_at": "2026-06-26",
+  "fun_fact_ai_generated": true,
+  "ai": {
+    "generated_at": "2026-06-29T16:59:40.419Z",
+    "model": "abab6.5s-chat",
+    "prompt_version": "v1",
+    "text_hash": "sha256:5ae94553"
+  },
+  "tts": {
+    "name_zh": "generated/name-zh.mp3",
+    "voice_id_zh": "female-tianmei",
+    "voice_id_en": "male-qn-qingse",
+    "generated_at": "2026-06-30T07:22:30.361Z",
+    "tts_model": "speech-2.8-hd",
+    "name_en": "generated/name-en.mp3",
+    "fun_fact": "generated/fun-fact.mp3"
+  }
 }

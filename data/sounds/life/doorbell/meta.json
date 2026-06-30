@@ -6,7 +6,7 @@
   "name_en": "Doorbell",
   "emoji": "🔔",
   "description": "门铃叮咚响，有客人来了",
-  "fun_fact": "门铃一响就知道有人来找我们玩了，是家里的礼貌小卫士",
+  "fun_fact": "叮咚，门铃响了，这是告诉你有客人来了家门哦。它的声音就像猫咪的喵喵，小狗的汪汪，能传递信息呢！",
   "sounds": [
     {
       "file": "audio/doorbell_1.mp3"
@@ -20,5 +20,21 @@
   "license": "CC0-1.0",
   "source": "https://freesound.org/people/Kneeling/sounds/642955/",
   "contributor": "wbyan2021",
-  "added_at": "2026-06-26"
+  "added_at": "2026-06-26",
+  "fun_fact_ai_generated": true,
+  "ai": {
+    "generated_at": "2026-06-29T16:59:37.211Z",
+    "model": "abab6.5s-chat",
+    "prompt_version": "v1",
+    "text_hash": "sha256:1325211a"
+  },
+  "tts": {
+    "name_zh": "generated/name-zh.mp3",
+    "voice_id_zh": "female-tianmei",
+    "voice_id_en": "male-qn-qingse",
+    "generated_at": "2026-06-30T07:22:21.464Z",
+    "tts_model": "speech-2.8-hd",
+    "name_en": "generated/name-en.mp3",
+    "fun_fact": "generated/fun-fact.mp3"
+  }
 }

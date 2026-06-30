@@ -6,20 +6,56 @@
   "name_en": "Crow",
   "emoji": "🐦‍⬛",
   "description": "聪明的黑鸟，嘎嘎叫",
-  "fun_fact": "乌鸦特别聪明，会把坚果丢在马路上，让汽车帮它压开吃果仁",
+  "fun_fact": "乌鸦是聪明的黑鸟，它们不仅会嘎嘎叫，还会模仿其他鸟儿的声音哦！",
   "sounds": [
-    { "file": "audio/crow1.mp3" },
-    { "file": "audio/crow2.mp3" },
-    { "file": "audio/crow3.mp3" },
-    { "file": "audio/crow4.mp3" },
-    { "file": "audio/crow5.mp3" },
-    { "file": "audio/crow6.mp3" },
-    { "file": "audio/crow7.mp3" },
-    { "file": "audio/crows.mp3" }
+    {
+      "file": "audio/crow1.mp3"
+    },
+    {
+      "file": "audio/crow2.mp3"
+    },
+    {
+      "file": "audio/crow3.mp3"
+    },
+    {
+      "file": "audio/crow4.mp3"
+    },
+    {
+      "file": "audio/crow5.mp3"
+    },
+    {
+      "file": "audio/crow6.mp3"
+    },
+    {
+      "file": "audio/crow7.mp3"
+    },
+    {
+      "file": "audio/crows.mp3"
+    }
   ],
-  "tags": ["鸟类", "嘎嘎", "乌鸦"],
+  "tags": [
+    "鸟类",
+    "嘎嘎",
+    "乌鸦"
+  ],
   "license": "CC0-1.0",
   "source": "https://freesound.org/",
   "contributor": "wbyan2021",
-  "added_at": "2026-06-17"
+  "added_at": "2026-06-17",
+  "fun_fact_ai_generated": true,
+  "ai": {
+    "generated_at": "2026-06-29T17:58:33.025Z",
+    "model": "abab6.5s-chat",
+    "prompt_version": "v1",
+    "text_hash": "5885ab02dfa05ffb"
+  },
+  "tts": {
+    "name_zh": "generated/name-zh.mp3",
+    "name_en": "generated/name-en.mp3",
+    "fun_fact": "generated/fun-fact.mp3",
+    "voice_id_zh": "female-tianmei",
+    "voice_id_en": "male-qn-qingse",
+    "generated_at": "2026-06-30T07:16:00.984Z",
+    "tts_model": "speech-2.8-hd"
+  }
 }

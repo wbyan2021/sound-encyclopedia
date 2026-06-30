@@ -6,13 +6,35 @@
   "name_en": "Pig",
   "emoji": "🐷",
   "description": "粉嘟嘟的胖家伙，哼哼叫",
-  "fun_fact": "猪其实特别聪明，比小狗还容易学会本事呢，它可不是笨笨的动物哦",
+  "fun_fact": "猪是粉嘟嘟的胖家伙，在农场里哼哼叫着找食物，它们聪明又喜欢社交哦！",
   "sounds": [
-    { "file": "audio/real_pig1.mp3" }
+    {
+      "file": "audio/real_pig1.mp3"
+    }
   ],
-  "tags": ["农场", "哼哼", "猪"],
+  "tags": [
+    "农场",
+    "哼哼",
+    "猪"
+  ],
   "license": "CC0-1.0",
   "source": "https://freesound.org/",
   "contributor": "wbyan2021",
-  "added_at": "2026-06-17"
+  "added_at": "2026-06-17",
+  "fun_fact_ai_generated": true,
+  "ai": {
+    "generated_at": "2026-06-29T16:59:19.953Z",
+    "model": "abab6.5s-chat",
+    "prompt_version": "v1",
+    "text_hash": "sha256:5ed3a110"
+  },
+  "tts": {
+    "name_zh": "generated/name-zh.mp3",
+    "voice_id_zh": "female-tianmei",
+    "voice_id_en": "male-qn-qingse",
+    "generated_at": "2026-06-30T07:21:38.739Z",
+    "tts_model": "speech-2.8-hd",
+    "name_en": "generated/name-en.mp3",
+    "fun_fact": "generated/fun-fact.mp3"
+  }
 }

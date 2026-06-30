@@ -6,7 +6,7 @@
   "name_en": "Drum",
   "emoji": "🥁",
   "description": "咚咚咚的鼓声",
-  "fun_fact": "鼓皮被敲打时振动就发出咚咚声，是最古老的乐器之一",
+  "fun_fact": "咚咚咚的鼓声不仅好听，其实还能传递信息呢！像一些小动物，比如青蛙，用它们的“鼓”——肚子，敲出不同的节奏来和同伴们交流呢！",
   "sounds": [
     {
       "file": "audio/drum_1.mp3"
@@ -20,5 +20,21 @@
   "license": "CC0-1.0",
   "source": "https://freesound.org/people/NovaSoundTechnology/sounds/118752/",
   "contributor": "wbyan2021",
-  "added_at": "2026-06-26"
+  "added_at": "2026-06-26",
+  "fun_fact_ai_generated": true,
+  "ai": {
+    "generated_at": "2026-06-29T16:59:38.879Z",
+    "model": "abab6.5s-chat",
+    "prompt_version": "v1",
+    "text_hash": "sha256:77d01e2d"
+  },
+  "tts": {
+    "name_zh": "generated/name-zh.mp3",
+    "voice_id_zh": "female-tianmei",
+    "voice_id_en": "male-qn-qingse",
+    "generated_at": "2026-06-30T07:22:25.995Z",
+    "tts_model": "speech-2.8-hd",
+    "name_en": "generated/name-en.mp3",
+    "fun_fact": "generated/fun-fact.mp3"
+  }
 }

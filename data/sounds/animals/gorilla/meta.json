@@ -6,13 +6,35 @@
   "name_en": "Gorilla",
   "emoji": "🦍",
   "description": "森林里的大个子，力气很大",
-  "fun_fact": "大猩猩和人类的基因有百分之九十八一样，是我们很近的亲戚哦",
+  "fun_fact": "大猩猩是森林里的大力士，它的力量可以和好几只老虎相比呢！",
   "sounds": [
-    { "file": "audio/real_gorilla1.mp3" }
+    {
+      "file": "audio/real_gorilla1.mp3"
+    }
   ],
-  "tags": ["野生动物", "强壮", "大猩猩"],
+  "tags": [
+    "野生动物",
+    "强壮",
+    "大猩猩"
+  ],
   "license": "CC0-1.0",
   "source": "https://freesound.org/",
   "contributor": "wbyan2021",
-  "added_at": "2026-06-17"
+  "added_at": "2026-06-17",
+  "fun_fact_ai_generated": true,
+  "ai": {
+    "generated_at": "2026-06-29T16:59:02.143Z",
+    "model": "abab6.5s-chat",
+    "prompt_version": "v1",
+    "text_hash": "sha256:792a9d94"
+  },
+  "tts": {
+    "name_zh": "generated/name-zh.mp3",
+    "voice_id_zh": "female-tianmei",
+    "voice_id_en": "male-qn-qingse",
+    "generated_at": "2026-06-30T07:20:55.807Z",
+    "tts_model": "speech-2.8-hd",
+    "name_en": "generated/name-en.mp3",
+    "fun_fact": "generated/fun-fact.mp3"
+  }
 }
